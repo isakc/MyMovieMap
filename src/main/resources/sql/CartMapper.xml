@@ -4,7 +4,8 @@
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="CartMapper">
+<!-- <mapper namespace="CartMapper"> -->
+<mapper namespace="com.model2.mvc.service.cart.CartDao">
 
 	<resultMap id="cartSelectMap" type="cart">
 		<id property="cartNo"				column="cart_no" 	jdbcType="NUMERIC"/>

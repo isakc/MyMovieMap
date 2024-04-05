@@ -29,10 +29,10 @@ public class UserController {
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 	
-	@Value("#{commonProperties['pageUnit']}")
+	@Value("#{['pageUnit']}")
 	int pageUnit;
 	
-	@Value("#{commonProperties['pageSize']}")
+	@Value("#{['pageSize']}")
 	int pageSize;
 
 	/// Constructor

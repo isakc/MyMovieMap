@@ -1,11 +1,16 @@
 package com.model2.mvc.common.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
 
 /*
- * FileName : PojoAspectJ.java
+ * FileName : RecordMethodTime.java
  *	:: XML 에 선언적으로 aspect 의 적용   
   */
+@Aspect
+@Component
 public class RecordMethodTime {
 
 	///Constructor
@@ -14,6 +19,7 @@ public class RecordMethodTime {
 	}
 	
 	//Around  Advice
+	@Around("execution(* com.model2.mvc.service..*Impl.*(..) )")
 	public Object invoke(ProceedingJoinPoint joinPoint) throws Throwable {
 			
 		long startTime = System.currentTimeMillis();

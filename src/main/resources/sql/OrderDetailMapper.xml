@@ -4,7 +4,8 @@
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="OrderDetailMapper">
+<!-- <mapper namespace="OrderDetailMapper"> -->
+<mapper namespace="com.model2.mvc.service.orderDetail.OrderDetailDao">
 
 	<resultMap id="orderDetailSelectMap" type="orderDetail">
 		<id property="orderNo"					column="order_no"	jdbcType="NUMERIC"/>
@@ -31,12 +32,4 @@
 	 	FROM orderdetails
 	 	WHERE prod_no = #{prodNo}
 	 </select>
-	 
-	 <select id="findQuantity" resultMap="orderDetailSelectMap">
-	 	SELECT prod_no, SUM(quantity) AS total_sales
-		FROM orderDetail
-		GROUP BY prod_no
-		ORDER BY total_sales DESC;
-	 </select>
-	
 </mapper>

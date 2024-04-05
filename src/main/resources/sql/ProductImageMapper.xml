@@ -4,7 +4,8 @@
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="ProductImageMapper">
+<!-- <mapper namespace="ProductImageMapper"> -->
+<mapper namespace="com.model2.mvc.service.product.ProductDao">
 
 	<resultMap id="ProductImageSelectMap" type="productImage">
 		<id property="imgNo"			column="img_no"		jdbcType="NUMERIC"/>

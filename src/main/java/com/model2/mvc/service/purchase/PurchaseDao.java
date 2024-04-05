@@ -11,8 +11,6 @@ public interface PurchaseDao {
 	//insert
 	public int addPurchase(Purchase purchase) throws Exception;
 	
-	public void addOrderDetail(OrderDetail orderDetail) throws Exception;
-	
 	//selectOne
 	public Purchase findPurchase(int tranNo) throws Exception;
 	
@@ -20,10 +18,6 @@ public interface PurchaseDao {
 	
 	//selectList
 	public List<Purchase> getPurchaseList(Search search) throws Exception;
-	
-	public List<OrderDetail> getOrderDetailList(int tranNo) throws Exception;
-
-	public List<OrderDetail> getOrderDetailListByProdNo(int prodNo) throws Exception;
 	
 	//update
 	public void updatePurchase(Purchase purchase) throws Exception;

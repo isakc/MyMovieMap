@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.model2.mvc.common.Search;
 import com.model2.mvc.common.TransactionStatus;
@@ -20,11 +21,16 @@ import com.model2.mvc.service.purchase.PurchaseService;
 import com.model2.mvc.service.user.UserService;
 
 @Service("purchaseServiceImpl")
+@Transactional
 public class PurchaseServiceImpl implements PurchaseService{
 
 	///Field
 	@Autowired
-	@Qualifier("purchaseDaoImpl")
+	@Qualifier("purchaseDao")
+	private PurchaseDao purchaseDao;
+
+	@Autowired
+	@Qualifier("orderDetailDaoImpl")
 	private PurchaseDao purchaseDao;
 	
 	@Autowired
