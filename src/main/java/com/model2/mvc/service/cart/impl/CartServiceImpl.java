@@ -20,7 +20,6 @@ public class CartServiceImpl implements CartService {
 	
 	///Field
 	@Autowired
-	@Qualifier("cartDaoImpl")
 	private CartDao cartDao;
 	
 	@Autowired

@@ -30,12 +30,6 @@ public class CategoryRestController {
 	@Qualifier("categoryServiceImpl")
 	private CategoryService categoryService;
 
-	@Value("#{commonProperties['pageUnit']}")
-	int pageUnit;
-
-	@Value("#{commonProperties['pageSize']}")
-	int pageSize;
-
 	/// Constructor
 	public CategoryRestController() {
 		System.out.println("==> Category default Constructor call");
@@ -48,7 +42,7 @@ public class CategoryRestController {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		try {
-			List<Category> list = (List<Category>) categoryService.getCategoryList().get("list");
+			List<Category> list = (List<Category>) categoryService.getCategoryList();
 			map.put("categoryList", list);
 			map.put("message", "ok");
 		}catch (Exception e) {

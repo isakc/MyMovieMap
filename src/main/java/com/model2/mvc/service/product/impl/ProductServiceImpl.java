@@ -20,6 +20,7 @@ import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.domain.ProductImage;
 import com.model2.mvc.service.product.ProductDao;
 import com.model2.mvc.service.product.ProductService;
+import com.model2.mvc.service.productImage.ProductImageDao;
 
 @Service("productServiceImpl")
 @Transactional
@@ -27,8 +28,10 @@ public class ProductServiceImpl implements ProductService {
 	
 	///Field
 	@Autowired
-	@Qualifier("productDaoImpl")
 	private ProductDao productDao;
+	
+	@Autowired
+	private ProductImageDao productImageDao;
 	
 	@Autowired
 	@Qualifier("categoryServiceImpl")
@@ -47,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
 			ProductImage image = new ProductImage();
 			image.setFileName(fileNames.get(i));
 			image.setProdNo(product.getProdNo());
-			productDao.addProductImage(image);
+			productImageDao.addProductImage(image);
 		}
 	}
 
@@ -58,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
 		Category category = categoryService.findCategory(product.getCategory().getCategoryNo());
 		product.setCategory(category);
 		
-		List<ProductImage> images = productDao.getProductImageList(prodNo);
+		List<ProductImage> images = productImageDao.getProductImageList(prodNo);
 		List<String> fileNames = new ArrayList<String>();
 				
 		for(ProductImage image: images) {
@@ -76,7 +79,7 @@ public class ProductServiceImpl implements ProductService {
 		Category category = categoryService.findCategory(product.getCategory().getCategoryNo());
 		product.setCategory(category);
 		
-		List<ProductImage> images = productDao.getProductImageList(product.getProdNo());
+		List<ProductImage> images = productImageDao.getProductImageList(product.getProdNo());
 		List<String> fileNames = new ArrayList<String>();
 				
 		for(int i=0; i<images.size(); i++) {
@@ -107,7 +110,7 @@ public class ProductServiceImpl implements ProductService {
 			Category productCategory = categoryService.findCategory(product.getCategory().getCategoryNo());
 			product.setCategory(productCategory);
 			
-			List<ProductImage> images = productDao.getProductImageList(product.getProdNo());
+			List<ProductImage> images = productImageDao.getProductImageList(product.getProdNo());
 			List<String> fileNames = new ArrayList<String>();
 					
 			for(int i=0; i<images.size(); i++) {
@@ -133,7 +136,7 @@ public class ProductServiceImpl implements ProductService {
 			ProductImage image = new ProductImage();
 			image.setFileName(fileNames.get(i));
 			image.setProdNo(product.getProdNo());
-			productDao.addProductImage(image);
+			productImageDao.addProductImage(image);
 		}
 	}
 
@@ -144,7 +147,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public void deleteProductImage(int prodNo) throws Exception {
-		productDao.deleteProductImage(prodNo);
+		productImageDao.deleteProductImage(prodNo);
 	}
 
 	@Override

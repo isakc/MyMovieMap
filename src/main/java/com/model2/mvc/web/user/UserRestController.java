@@ -28,10 +28,10 @@ public class UserRestController {
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 	
-	@Value("#{commonProperties['pageUnit']}")
+	@Value("${common.pageUnit}")
 	int pageUnit;
 	
-	@Value("#{commonProperties['pageSize']}")
+	@Value("${common.pageSize}")
 	int pageSize;
 
 	/// Constructor

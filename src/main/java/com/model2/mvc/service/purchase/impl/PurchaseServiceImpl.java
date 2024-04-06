@@ -15,6 +15,7 @@ import com.model2.mvc.common.TransactionStatus;
 import com.model2.mvc.service.domain.OrderDetail;
 import com.model2.mvc.service.domain.Purchase;
 import com.model2.mvc.service.domain.User;
+import com.model2.mvc.service.orderDetail.OrderDetailDao;
 import com.model2.mvc.service.product.ProductService;
 import com.model2.mvc.service.purchase.PurchaseDao;
 import com.model2.mvc.service.purchase.PurchaseService;
@@ -26,12 +27,10 @@ public class PurchaseServiceImpl implements PurchaseService{
 
 	///Field
 	@Autowired
-	@Qualifier("purchaseDao")
 	private PurchaseDao purchaseDao;
 
 	@Autowired
-	@Qualifier("orderDetailDaoImpl")
-	private PurchaseDao purchaseDao;
+	private OrderDetailDao orderDetailDao;
 	
 	@Autowired
 	@Qualifier("userServiceImpl")
@@ -51,7 +50,7 @@ public class PurchaseServiceImpl implements PurchaseService{
 	}
 	
 	public void addOrderDetail(OrderDetail orderDetail) throws Exception {
-		purchaseDao.addOrderDetail(orderDetail);
+		orderDetailDao.addOrderDetail(orderDetail);
 	}
 
 	public Purchase findPurchase(int tranNo) throws Exception {
@@ -89,20 +88,20 @@ public class PurchaseServiceImpl implements PurchaseService{
 	
 	public List<OrderDetail> getOrderDetailList(int tranNo) throws Exception {
 		
-		List<OrderDetail> list = purchaseDao.getOrderDetailList(tranNo);
+		List<OrderDetail> list = orderDetailDao.getOrderDetailList(tranNo);
 		
 		for(int i=0; i<list.size(); i++) {
 			list.get(i).setProduct(productService.findProduct(list.get(i).getProduct().getProdNo()));
 			list.get(i).setTransaction(purchaseDao.findPurchase(list.get(i).getTransaction().getTranNo()));
 		}
 		
-		return purchaseDao.getOrderDetailList(tranNo);
+		return orderDetailDao.getOrderDetailList(tranNo);
 	}
 
 	public Map<String, Object> getOrderDetailListByProdNo(int prodNo) throws Exception {
 		
 		ArrayList<String> statusList = new ArrayList<String>();
-		List<OrderDetail> list = purchaseDao.getOrderDetailListByProdNo(prodNo);
+		List<OrderDetail> list = orderDetailDao.getOrderDetailListByProdNo(prodNo);
 		
 		for(int i=0; i<list.size(); i++) {
 			list.get(i).setProduct(productService.findProduct(list.get(i).getProduct().getProdNo())); 

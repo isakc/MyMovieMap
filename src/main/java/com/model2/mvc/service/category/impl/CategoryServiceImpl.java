@@ -1,9 +1,9 @@
 package com.model2.mvc.service.category.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +17,6 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	///Field
 	@Autowired
-	@Qualifier("categoryDaoImpl")
 	private CategoryDao categoryDao;
 
 	///Constructor
@@ -31,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Map<String, Object> getCategoryList() throws Exception {
+	public List<Category> getCategoryList() throws Exception {
 		return categoryDao.getCategoryList();
 	}
 

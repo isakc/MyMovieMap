@@ -2,8 +2,11 @@ package com.model2.mvc.service.cart;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.model2.mvc.service.domain.Cart;
 
+@Mapper
 public interface CartDao {
 	//insert
 	public void addCart(Cart cart) throws Exception;

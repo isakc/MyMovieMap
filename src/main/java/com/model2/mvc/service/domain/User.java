@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.AccessLevel;
 
 @Builder  //=> 빌더패턴 이용 상태값설정(???)
 @Setter
@@ -25,7 +24,6 @@ public class User {
 	private String password;
 	private String role;
 	private String ssn;
-	@Setter(AccessLevel.PRIVATE)
 	private String phone;
 	private String addr;
 	private String email;
@@ -44,5 +42,22 @@ public class User {
 	
 	public void setPhone(String phone) {
 		this.phone = phone;
+		/////////////// EL 적용 위해 추가 ///////////
+		if(phone != null && phone.length() !=0 ){
+			phone1 = phone.split("-")[0];
+			phone2 = phone.split("-")[1];
+			phone3 = phone.split("-")[2];
+		}
+	}
+	
+	public void setAddr(String addr) {
+		this.addr = addr;
+		if(addr != null && addr.length() !=0 && addr.split("/").length > 1){
+			addr1 = addr.split("/")[0];
+			addr2 = addr.split("/")[1];
+			if(addr.split("/").length == 3) {
+				addr3 = addr.split("/")[2];
+			}
+		}
 	}
 }

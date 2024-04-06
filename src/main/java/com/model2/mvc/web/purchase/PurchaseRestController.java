@@ -45,10 +45,10 @@ public class PurchaseRestController {
 	@Qualifier("cartServiceImpl")
 	private CartService cartService;
 
-	@Value("#{commonProperties['pageUnit']}")
+	@Value("${common.pageUnit}")
 	int pageUnit;
 
-	@Value("#{commonProperties['pageSize']}")
+	@Value("${common.pageSize}")
 	int pageSize;
 
 	/// Constructor

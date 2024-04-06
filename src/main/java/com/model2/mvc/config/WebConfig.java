@@ -7,9 +7,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.model2.mvc.common.web.LogonCheckInterceptor;
 import com.model2.mvc.common.web.CookieSettingInterceptor;
 
-//===================== 추가된 Class  ======================//
-// Interceptor 등록하는 WebMvcCongigurer 구현 Bean
-//=======================================================//
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 

@@ -27,4 +27,8 @@ public class Purchase {
 	private String receiverPhone;
 	private String tranCode;
 	private int tranNo;
+	/////////////////////Ãß°¡///////////////////////////////////////////////
+	private String divyAddr1;
+	private String divyAddr2;
+	private String divyAddr3;
 }

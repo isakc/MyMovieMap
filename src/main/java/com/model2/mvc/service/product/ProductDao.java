@@ -3,11 +3,9 @@ package com.model2.mvc.service.product;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Product;
-import com.model2.mvc.service.domain.ProductImage;
 
 @Mapper
 public interface ProductDao {

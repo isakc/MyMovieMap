@@ -52,8 +52,7 @@ public class CategoryServiceTest {
 	
 	 @Test
 	 public void testGetCategoryList() throws Exception{
-		 Map<String, Object> map = categoryService.getCategoryList();
-		 List<Category> list = (List<Category>) map.get("list");
+		 List<Category> list = categoryService.getCategoryList();
 		 
 		 System.out.println(list);
 		 Assert.assertEquals(10, list.size());

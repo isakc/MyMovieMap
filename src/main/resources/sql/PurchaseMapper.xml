@@ -31,7 +31,8 @@
 	 
 	 <select id="findPurchase" parameterType="int" resultMap="purchaseSelectMap">
 		SELECT
-		tran_no, payment_option, receiver_name, receiver_phone, demailaddr, dlvy_request, TRIM(tran_status_code) tran_status_code, order_data, To_char(dlvy_date, 'YYYY-MM-DD') dlvy_date, buyer_id
+		tran_no, TRIM(payment_option) payment_option, receiver_name, receiver_phone, demailaddr, dlvy_request, 
+		TRIM(tran_status_code) tran_status_code, order_data, To_char(dlvy_date, 'YYYY-MM-DD') dlvy_date, buyer_id
 		FROM transaction
 		<where>
 			tran_no=#{tranNo}

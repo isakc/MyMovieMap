@@ -2,8 +2,11 @@ package com.model2.mvc.service.productImage;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.model2.mvc.service.domain.ProductImage;
 
+@Mapper
 public interface ProductImageDao {
 
 	//insert

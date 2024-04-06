@@ -1,5 +1,6 @@
 package com.model2.mvc.service.category;
 
+import java.util.List;
 import java.util.Map;
 
 import com.model2.mvc.service.domain.Category;
@@ -13,5 +14,5 @@ public interface CategoryService {
 	public Category findCategory(int categoryNo) throws Exception;
 
 	//selectList
-	public Map<String, Object> getCategoryList() throws Exception;
+	public List<Category> getCategoryList() throws Exception;
 }

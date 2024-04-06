@@ -44,10 +44,10 @@ public class ProductRestController {
 	@Qualifier("categoryServiceImpl")
 	private CategoryService categoryService;
 
-	@Value("#{commonProperties['pageUnit']}")
+	@Value("${common.pageUnit}")
 	int pageUnit;
 
-	@Value("#{commonProperties['pageSize']}")
+	@Value("${common.pageSize}")
 	int pageSize;
 	
 	///Constructor
@@ -64,7 +64,7 @@ public class ProductRestController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
-			ArrayList<Category> list = (ArrayList<Category>) categoryService.getCategoryList().get("list");
+			ArrayList<Category> list = (ArrayList<Category>) categoryService.getCategoryList();
 			
 			map.put("message", "ok");
 			map.put("list", list);
@@ -172,7 +172,7 @@ public class ProductRestController {
 			map.put("resultPage", resultPage);
 			map.put("list", resultMap.get("list"));
 			map.put("search", search);
-			map.put("categoryList", categoryService.getCategoryList().get("list"));
+			map.put("categoryList", categoryService.getCategoryList());
 		}catch (Exception e) {
 			map.put("message", "fail");
 		}
@@ -192,7 +192,7 @@ public class ProductRestController {
 			
 			map.put("message", "ok");
 			map.put("product", findProduct);
-			map.put("categoryList", categoryService.getCategoryList().get("list"));
+			map.put("categoryList", categoryService.getCategoryList());
 		}catch (Exception e) {
 			map.put("message", "fail");
 		}

@@ -41,14 +41,11 @@ public class ProductController {
 	@Qualifier("categoryServiceImpl")
 	private CategoryService categoryService;
 
-	@Value("#{commonProperties['pageUnit']}")
+	@Value("${common.pageUnit}")
 	int pageUnit;
 
-	@Value("#{commonProperties['pageSize']}")
+	@Value("${common.pageSize}")
 	int pageSize;
-
-	@Value("#{commonProperties['copy']}")
-	String copy;
 	
 	/// Constructor
 	public ProductController() {
@@ -61,7 +58,7 @@ public class ProductController {
 
 		System.out.println("/product/addProductView : GET");
 
-		model.addAttribute("categoryList", categoryService.getCategoryList().get("list"));
+		model.addAttribute("categoryList", categoryService.getCategoryList());
 
 		return "forward:/product/addProductView.jsp";
 	}
@@ -130,7 +127,7 @@ public class ProductController {
 		model.addAttribute("list", resultMap.get("list"));
 		model.addAttribute("search", search);
 		model.addAttribute("history", history);
-		model.addAttribute("categoryList", categoryService.getCategoryList().get("list"));
+		model.addAttribute("categoryList", categoryService.getCategoryList());
 
 		return "forward:/product/listProduct.jsp";
 	}
@@ -143,7 +140,7 @@ public class ProductController {
 		Product findProduct = productService.findProduct(prodNo);
 
 		model.addAttribute("product", findProduct);
-		model.addAttribute("categoryList", categoryService.getCategoryList().get("list"));
+		model.addAttribute("categoryList", categoryService.getCategoryList());
 
 		return "forward:/product/updateProduct.jsp";
 	}

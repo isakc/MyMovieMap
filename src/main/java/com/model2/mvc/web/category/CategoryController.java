@@ -27,12 +27,6 @@ public class CategoryController {
 	@Qualifier("categoryServiceImpl")
 	private CategoryService categoryService;
 
-	@Value("#{commonProperties['pageUnit']}")
-	int pageUnit;
-
-	@Value("#{commonProperties['pageSize']}")
-	int pageSize;
-
 	/// Constructor
 	public CategoryController() {
 		System.out.println("==> Category default Constructor call");
@@ -43,7 +37,7 @@ public class CategoryController {
 
 		System.out.println("category/addCategory");
 
-		model.addAttribute("categoryList", categoryService.getCategoryList().get("list"));
+		model.addAttribute("categoryList", categoryService.getCategoryList());
 
 		return "forward:/category/addCategoryView.jsp";
 	}
