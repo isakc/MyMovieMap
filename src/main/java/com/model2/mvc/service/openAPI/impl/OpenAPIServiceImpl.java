@@ -11,8 +11,15 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model2.mvc.service.domain.DailyBoxOffice;
 import com.model2.mvc.service.openAPI.OpenAPIService;
@@ -21,7 +28,7 @@ import com.model2.mvc.service.openAPI.OpenAPIService;
 public class OpenAPIServiceImpl implements OpenAPIService {
 	///Field
 	final String key = "183da6c4fa3be1aadb21ae6ca7cdf1c0";
-	
+	HttpClient httpClient = HttpClients.createDefault();
 	
 	///Constructor
 	public OpenAPIServiceImpl() {
@@ -34,7 +41,7 @@ public class OpenAPIServiceImpl implements OpenAPIService {
         cal.add(Calendar.DAY_OF_MONTH, -1);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 	    String targetDt = dateFormat.format(cal.getTime());
-		
+	  
 		String apiURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key="+key+"&targetDt="+targetDt;
 		
 		URL url = new URL(apiURL);
@@ -47,32 +54,28 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 		HashMap<String, Object> boxOfficeResult = (HashMap<String, Object>) dailyResult.get("boxOfficeResult");
 		ArrayList<HashMap<String, Object>> dailyBoxOfficeList = (ArrayList<HashMap<String, Object>>) boxOfficeResult.get("dailyBoxOfficeList");
 		
-//		for(HashMap<String, Object> map: dailyBoxOfficeList) {
-//			String movieNm = (String) map.get("movieNm");
-//			apiURL = "https://api.themoviedb.org/3/search/movie?query="+URLEncoder.encode(movieNm)+"&include_adult=false&language=en-US&page=1";
-//			url = new URL(apiURL);
-//			
-//			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//			connection.setRequestMethod("GET");
-//			String token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYjEzOTEzM2YyZjMwYjllN2U0MjdkZDliOGEzMmU3NiIsInN1YiI6IjY2MGI0ZTJjZDZkYmJhMDE0YTZmMTA1YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Qjec18AnxU4brNq_usPvc7jUYRLWy2naBcSpVNg2e_c";
-//            connection.setRequestProperty("Authorization", token);
-//            connection.setRequestProperty("accept", "application/json");
-//			
-//            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//            String inputLine;
-//            StringBuilder response = new StringBuilder();
-//            while ((inputLine = in.readLine()) != null) {
-//                response.append(inputLine);
-//            }
-//			
-//			//System.out.println(map.get("movieNm"));
-//		}
-		
 		List<DailyBoxOffice> dailyBoxOffices = new ArrayList<>();
 		
-		for (HashMap<String, Object> movie : dailyBoxOfficeList) {
+		for(HashMap<String, Object> movie: dailyBoxOfficeList) {
+			String movieCd =  ((String) movie.get("movieCd"));
+			
+//			HttpGet request = new HttpGet("https://api.themoviedb.org/3/movie/"+movieCd+"?language=en-US");
+//			request.addHeader("accept", "application/json");
+//			request.addHeader("Authorization",
+//					"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMzVkMzUxZjI5OGE4NTlkMGVhNmY4YjE4MDhhZTAxNyIsInN1YiI6IjY2MGI0ZTJjZDZkYmJhMDE0YTZmMTA1YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BxMqyUGC_vnLWUA-FNVhhrYCdjyJBe4gxmhyeacblnk");
+//
+//			HttpResponse response = httpClient.execute(request);
+//			String responseBody = EntityUtils.toString(response.getEntity());
+//			 
+//			
+//			JsonNode root = mapper.readTree(responseBody);
+//			
+//			JsonNode firstResult = root.path("results").get(0);
+//
+//            String posterPath = "https://image.tmdb.org/t/p/w500" + firstResult.path("poster_path").asText();
+
 			DailyBoxOffice dailyBoxOffice = mapper.convertValue(movie, DailyBoxOffice.class);
-		    dailyBoxOffices.add(dailyBoxOffice);
+			dailyBoxOffices.add(dailyBoxOffice);
 		}
 		
 		return dailyBoxOffices;

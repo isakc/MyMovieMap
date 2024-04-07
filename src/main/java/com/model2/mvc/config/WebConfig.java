@@ -19,6 +19,6 @@ public class WebConfig implements WebMvcConfigurer {
 		
 		// URL Pattern 을 확인하고. interceptor 적용유무 등록함.
 		registry.addInterceptor( new LogonCheckInterceptor()).addPathPatterns("/user/**");
-		registry.addInterceptor( new CookieSettingInterceptor()).addPathPatterns("/product/getProduct/*");
+		registry.addInterceptor( new CookieSettingInterceptor()).addPathPatterns("/product/getProduct/**");
 	}
 }

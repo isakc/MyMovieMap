@@ -44,6 +44,7 @@
 					$.each(data.list, (index, movie)=> {
 				          var row = $('<tr>');
 				          row.append('<td>' + movie.rank + '위</td>');
+				          row.append('<td><img src=' + movie.posterPath + '/></td>');
 				          row.append('<td>' + movie.movieNm + '</td>');
 				          row.append('<td>' + movie.openDt + '</td>');
 				          row.append('<td>' + movie.salesAmt.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원</td>');
@@ -84,6 +85,7 @@
 			<thead>
 				<tr>
 					<th>순위</th>
+					<th>포스터</th>
 					<th>영화명</th>
 					<th>개봉일</th>
 					<th>매출액</th>

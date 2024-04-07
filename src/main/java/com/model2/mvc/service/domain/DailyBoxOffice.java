@@ -33,4 +33,5 @@ public class DailyBoxOffice {
     private String audiAcc;
     private String scrnCnt;
     private String showCnt;
+    private String posterPath;
 }
