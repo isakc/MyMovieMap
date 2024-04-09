@@ -33,6 +33,7 @@ public class OpenAPIRestController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
+			openAPIService.SeleniumTest();
 			map.put("list", openAPIService.getMoiveList());
 			map.put("message", "ok");
 			
