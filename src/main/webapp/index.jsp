@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
  <c:if test="${ ! empty user }">
- 	<jsp:forward page="main.jsp"/>
+ 	<jsp:forward page="/openAPI/main"/>
  </c:if>
  
 <html>

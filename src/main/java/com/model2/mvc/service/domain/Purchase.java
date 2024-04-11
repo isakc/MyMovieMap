@@ -18,6 +18,7 @@ import lombok.ToString;
 public class Purchase {
 
 	private User buyer;
+	
 	private String divyAddr;
 	private String divyDate;
 	private String divyRequest;
@@ -31,4 +32,15 @@ public class Purchase {
 	private String divyAddr1;
 	private String divyAddr2;
 	private String divyAddr3;
+	
+	public void setAddr(String divyAddr) {
+		this.divyAddr = divyAddr;
+		if(divyAddr != null && divyAddr.length() !=0 && divyAddr.split("/").length > 1){
+			divyAddr1 = divyAddr.split("/")[0];
+			divyAddr2 = divyAddr.split("/")[1];
+			if(divyAddr.split("/").length == 3) {
+				divyAddr3 = divyAddr.split("/")[2];
+			}
+		}
+	}
 }

@@ -173,7 +173,8 @@
 		}
 
 		 let lastScroll = 0; //현재 스크롤 위치 저장
-		
+		 let throttleTimer;
+		 
 		$(document).scroll(function(e){
 		    var currentScroll = $(this).scrollTop(); //현재높이
 		    var documentHeight = $(document).height();//전체 문서의 높이
@@ -184,11 +185,13 @@
 
 		        //nowHeight을 통해 현재 화면의 끝이 어디까지 내려왔는지 파악가능 
 		        //즉 전체 문서의 높이에 일정량 근접했을때 글 더 불러오기)
-		        if(documentHeight < (nowHeight + (documentHeight*0.1))){
-		        	//함수콜
-		        	if(${resultPage.totalPage} > $("#currentPage").val()){
-						getData();
-		        	}
+		    	if(documentHeight < (nowHeight + (documentHeight * 0.1))){
+		            // 스로틀링을 적용하여 1초에 한 번씩만 함수 호출
+		            clearTimeout(throttleTimer);
+		            throttleTimer = setTimeout(function() {
+		                // 함수 호출
+		                getData();
+		            }, 300); // 0.3초에 한 번씩만 호출
 		        }
 		    }
 

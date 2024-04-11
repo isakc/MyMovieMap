@@ -29,31 +29,6 @@
    	</style>
    	
    	<script type="text/javascript">
-   		$(function () {
-			$.ajax({
-				url: "/openAPI/json/main",
-				method: "GET",
-				headers: {
-					"Accept": "application/json",
-					"Content-Type": "application/json"
-				},
-					
-				success: function(data) {
-			        var tableBody = $('#boxOfficeBody');
-					
-					$.each(data.list, (index, movie)=> {
-				          var row = $('<tr>');
-				          row.append('<td>' + movie.rank + '위</td>');
-				          row.append('<td><img src=' + movie.posterPath + '/></td>');
-				          row.append('<td>' + movie.movieNm + '</td>');
-				          row.append('<td>' + movie.openDt + '</td>');
-				          row.append('<td>' + movie.salesAmt.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원</td>');
-				          row.append('<td>' + movie.audiCnt.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '명</td>');
-				          tableBody.append(row);
-				        });
-				}
-			})
-		})
    	</script>
    	
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -65,19 +40,6 @@
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  아래의 내용은 http://getbootstrap.com/getting-started/  참조 -->	
-   	<div class="container ">
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-      
-      <!-- 여기를 Slide로 처리해서 product 이미지로 -->
-      <div class="jumbotron">
-        <h1>Model2MVCShop </h1>
-        <p>J2SE , DBMS ,JDBC , Servlet & JSP, Java Framework , HTML5 , UI Framework 학습 후 Mini-Project 진행</p>
-     </div>
-     
-     
-    </div>
-
 	<!-- 참조 : http://getbootstrap.com/css/   : container part..... -->
 	<div class="container">
 		<h2 class="my-4">Daily Box Office</h2>
@@ -85,7 +47,6 @@
 			<thead>
 				<tr>
 					<th>순위</th>
-					<th>포스터</th>
 					<th>영화명</th>
 					<th>개봉일</th>
 					<th>매출액</th>
@@ -93,6 +54,15 @@
 				</tr>
 			</thead>
 			<tbody id="boxOfficeBody">
+			<c:forEach var="movie" items="${list }">
+				<tr>
+					<td>${movie.rank }</td>
+					<td>${movie.movieNm }</td>
+					<td>${movie.openDt }</td>
+					<td>${movie.salesAmt }</td>
+					<td>${movie.audiCnt }</td>
+				</tr>
+			</c:forEach>
 			</tbody>
 		</table>
 	</div>

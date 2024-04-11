@@ -21,13 +21,13 @@
 		VALUES(seq_orderdetails_order_no.NEXTVAL, #{transaction.tranNo}, #{product.prodNo}, #{quantity}, SYSDATE)
 	 </insert>
 	 
-	 <select id="findProductList" parameterType="int" resultMap="orderDetailSelectMap">
+	 <select id="getOrderDetailList" parameterType="int" resultMap="orderDetailSelectMap">
 	 	SELECT *
 	 	FROM orderdetails
 	 	WHERE tran_no = #{tranNo}
 	 </select>
 	 
-	 <select id="findProductListByProdNo" parameterType="int" resultMap="orderDetailSelectMap">
+	 <select id="getOrderDetailListByProdNo" parameterType="int" resultMap="orderDetailSelectMap">
 	 	SELECT *
 	 	FROM orderdetails
 	 	WHERE prod_no = #{prodNo}

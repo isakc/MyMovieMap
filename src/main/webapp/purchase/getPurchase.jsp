@@ -103,7 +103,7 @@
 				
 				<tr>
 					<td>구매자주소</td>
-					<td>${purchase.divyAddr }</td>
+					<td>${purchase.divyAddr1 } ${purchase.divyAddr2 } ${purchase.divyAddr3 } </td>
 				</tr>
 				
 				<tr>
