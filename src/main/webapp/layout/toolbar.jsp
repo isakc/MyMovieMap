@@ -92,7 +92,7 @@
 	                 <c:if test="${sessionScope.user.role == 'admin'}">
 		              <li class="dropdown">
 		                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-		                         <span >카테고리</span>
+		                         <span>카테고리</span>
 		                         <span class="caret"></span>
 		                     </a>
 		                     <ul class="dropdown-menu">
@@ -106,6 +106,7 @@
 	             <c:choose>
 	             	<c:when test="${user != null }">
 	             		<ul class="nav navbar-nav navbar-right">
+	             			<li><a href="#">${user.userId }</a></li>
 	                		<li><a href="#">로그아웃</a></li>
 	           	 		</ul>
 	           	 	
@@ -183,4 +184,8 @@
 	 	$( "a:contains('장바구니 목록')" ).on("click" , function() {
 			$(self.location).attr("href","/cart/listCart");
 		});
+	 	
+	 	$(".navbar-right a").on("click", function () {
+	 		$(self.location).attr("href","/user/getUser/"+$(this).text());
+		})
 	</script>  

@@ -25,6 +25,7 @@ import org.springframework.util.ObjectUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model2.mvc.common.WebDriverUtil;
 import com.model2.mvc.service.domain.DailyBoxOffice;
+import com.model2.mvc.service.domain.Movie;
 import com.model2.mvc.service.openAPI.OpenAPIService;
 
 @Service("openAPIServiceImpl")
@@ -81,18 +82,13 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 	        }
 	        bf.close();
 	        
-	        System.out.println(sb.toString());
-
 	        JSONParser parser = new JSONParser();
 	        JSONObject jsonObject = (JSONObject) parser.parse(sb.toString());
             JSONArray dataArray = (JSONArray) jsonObject.get("Data");
             JSONObject dataObject = (JSONObject) dataArray.get(0);
             JSONArray resultArray = (JSONArray) dataObject.get("Result");
             JSONObject resultObject = (JSONObject) resultArray.get(0);
-            String posters = (String) resultObject.get("posters");
-            System.out.println("Posters: " + posters);
             String posterPath = ((String) resultObject.get("posters")).split("\\|")[0];
-            System.out.println("PosterPath: " + posterPath);
 
 			DailyBoxOffice dailyBoxOffice = mapper.convertValue(movie, DailyBoxOffice.class);
 			dailyBoxOffice.setPosterPath(posterPath);
@@ -124,5 +120,12 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 		///////////////////////////////////////////////
 		List<WebElement> childElement = parentElement.findElements(By.className("numb"));
 		System.out.println("ÄíÆù »ç¿ë: " + childElement.get(0).getText());
+	}
+
+	@Override
+	public Movie getMovie() throws Exception {
+		
+		
+		return null;
 	}
 }
