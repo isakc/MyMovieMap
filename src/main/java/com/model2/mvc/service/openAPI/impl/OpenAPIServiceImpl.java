@@ -19,6 +19,7 @@ import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -30,8 +31,13 @@ import com.model2.mvc.service.openAPI.OpenAPIService;
 
 @Service("openAPIServiceImpl")
 public class OpenAPIServiceImpl implements OpenAPIService {
+	
 	///Field
-	final String key = "183da6c4fa3be1aadb21ae6ca7cdf1c0";
+	@Value("${common.kobisAPIKey}")
+	String kobisAPIKey;
+	@Value("${common.kmdbAPIKey}")
+	String kmdbAPIKey;
+	
 	HttpClient httpClient = HttpClients.createDefault();
 	WebDriver driver = WebDriverUtil.getChromeDriver();
 	
@@ -47,7 +53,7 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 	    String targetDt = dateFormat.format(cal.getTime()); //어제 날짜 가져오기
 	  
-		String apiURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key="+key+"&targetDt="+targetDt;
+		String apiURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key="+kobisAPIKey+"&targetDt="+targetDt;
 		
 		URL url = new URL(apiURL);
 		
@@ -67,7 +73,7 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 			String releaseDate =  ((String) movie.get("openDt")).replaceAll("-", "");
 			
 			StringBuilder urlBuilder = new StringBuilder("http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y"); /*URL*/
-	        urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=L0NAKEWZ4V1U1RO83P47"); /*Service Key*/
+	        urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + kmdbAPIKey); /*Service Key*/
 	        urlBuilder.append("&" + URLEncoder.encode("query","UTF-8") + "=" + URLEncoder.encode(movieNm, "UTF-8")); /*영화이름*/
 	        urlBuilder.append("&" + URLEncoder.encode("releaseDts","UTF-8") + "=" + URLEncoder.encode(releaseDate, "UTF-8"));
 	        

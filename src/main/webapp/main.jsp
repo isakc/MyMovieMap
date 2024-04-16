@@ -1,119 +1,142 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page contentType="text/html; charset=EUC-KR"%>
 <%@ page pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 
 <html lang="ko">
-	
+
 <head>
-	<title>MEET PLAY SHARE</title>
-	<meta charset="EUC-KR">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--   jQuery , Bootstrap CDN  -->
-	<c:import url="/common/link.jsp"/>
-	
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-   
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-	
-	<!--  CSS 추가 : 툴바에 화면 가리는 현상 해결 :  주석처리 전, 후 확인-->
-	<style>
-        body {
-            padding-top : 70px;
-        }
-        
-        strong{
-        	font-size: 25px;
-        }
-        
-        .topContainer{
-        	padding-top: 35px;
-        }
-        
-   	</style>
-   	
-   	<script type="text/javascript">
-   		$(function () {
-   			
-		})
-		
-		$(function () {
-			
-			$.ajax({
-				url: "/openAPI/getMovie",
-				type: "POST",
-				headers: {
-					"Accept": "application/json",
-					"Content-Type": "application/json"
-				},
-				data: JSON.stringify(data),
-				success: function(data){
-					$("#currentPage").val(data.resultPage.now);
-					var productList = data.list; // 받아온 상품 목록 데이터
-				    var container = $(".col-md-11"); // 상품 목록을 추가할 컨테이너 요소 선택
-				    
-				    productList.forEach(function(product) {
-				    	var card =
-				            "<div class='col-md-4'>"
-				           +"<a href=/product/getProduct/"+product.prodNo+"/search class=product-link data-prod-no="+product.prodNo+">"
-				                +"<div class='card text-center fixed-height'>"
-				                    +"<img src='/images/uploadFiles/"+product.fileNames[0] +"'class=card-img-top/>"
-				                    +"<div class='card-body'>"
-				                        +"<h5 class='card-title'>"+product.prodName+"</h5>"
-				                        +"<p class='card-text'>"+product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원</p>"
-				                        +"<p class='card-text'>"+product.quantity+" 개 남음</p>"
-				                    +"</div></div></a></div>";
-				        container.append(card); // 컨테이너에 상품 카드 추가
-				    });
-				}
-			});
-			
-		})
-   		
-   	</script>
-   	
-     <!--  ///////////////////////// JavaScript ////////////////////////// -->
+<title>MEET PLAY SHARE</title>
+<meta charset="EUC-KR">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!--   jQuery , Bootstrap CDN  -->
+<c:import url="/common/link.jsp" />
+<link rel="stylesheet" href="/css/main.css"/>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap Dropdown Hover JS -->
+<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+
+<!--  CSS 추가 : 툴바에 화면 가리는 현상 해결 :  주석처리 전, 후 확인-->
+<style>
+body {
+	padding-top: 70px;
+}
+
+strong {
+	font-size: 25px;
+}
+
+.topContainer {
+	padding-top: 35px;
+}
+</style>
+
+<script type="text/javascript">
+	$(function() {
+
+	})
+</script>
+
+<!--  ///////////////////////// JavaScript ////////////////////////// -->
 </head>
-	
+
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
+	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!-- 참조 : http://getbootstrap.com/css/   : container part..... -->
 	<div class="container topContainer">
-	<div class="row">
-		<div class="col-md-6">
-		
-			<div class="card mb-3">
-			
-			<div class="row g-0">
-				<div class="col-md-7">
-					<img src="${list[0].posterPath }" class="img-fluid rounded-start" alt="..." style="width:289px; height:410px;">
-				</div>
+	
+    <div class="row">
+    
+        <div class="row">
+        
+            <div class="col-md-9">
+                <h3>일일 박스오피스</h3>
+            </div>
+            
+            <div class="col-md-3">
+                <!-- Controls -->
+                <div class="controls pull-right hidden-xs">
+                    <a class="left fa fa-chevron-left btn btn-primary" href="#carousel-example-generic"
+                        data-slide="prev"></a><a class="right fa fa-chevron-right btn btn-primary" href="#carousel-example-generic"
+                            data-slide="next"></a>
+                </div>
+            </div>
+        </div>
+        
+        <div id="carousel-example-generic" class="carousel slide hidden-xs" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+            
+            <c:set var="count" value="0"/>
+            <c:forEach var="movie" items="${list }">
+            	<c:if test="${count % 3 == 0}">
+            		<div class="item ${count == 0 ? 'active' : '' }">
+						<div class="row">
+				</c:if>
 				
-				<div class="col-md-5">
-					<div class="card-body">
-						<strong class="card-title">${list[0].movieNm }</strong>
-						<p class="card-text">개봉일: ${list[0].openDt }</p>
-						<p class="card-text"></p>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		</div>
-		
-		<div class="col-md-6">
-			<table class="table">
+					<div class="col-sm-4">
+								<div class="col-item">
+									<div class="photo">
+										<img src="${movie.posterPath }" class="img-responsive" alt="a" />
+									</div>
+									<div class="info">
+
+												<strong>${count+1}위 ${movie.movieNm }</strong>
+											<c:choose>
+													<c:when test="${movie.rankInten > 0}">
+														<i class="fas fa-arrow-up" style="color: red;"></i>
+														<span>${movie.rankInten }</span>
+													</c:when>
+
+													<c:when test="${movie.rankInten == 0 }">
+														<c:choose>
+															<c:when test="${movie.rankOldAndNew == 'NEW' }">
+																<span style="color: orange;">NEW</span>
+															</c:when>
+
+															<c:otherwise>
+																<i class="fas fa-minus"></i>
+															</c:otherwise>
+														</c:choose>
+													</c:when>
+
+													<c:otherwise>
+														<i class="fas fa-arrow-down" style="color: blue;"></i>
+														<span>${fn:replace(movie.rankInten, '-' , '') }</span>
+													</c:otherwise>
+												</c:choose>
+												<h5 class="price-text-color">어제 관객수: <fmt:formatNumber value="${movie.audiCnt }" pattern="#,###명" /></h5>
+												<h5 class="price-text-color">누적 관객수: <fmt:formatNumber value="${movie.audiAcc }" pattern="#,###명" /></h5>
+												<h5>개봉일: ${movie.openDt }</h5>
+												
+
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</div> <!-- 카드 -->
+							
+					<c:if test="${ (count+1) % 3 == 0}">
+            				</div>
+						</div> <!-- carousel -->
+					</c:if>
+            	<c:set var="count" value="${count+1 }"/>
+            </c:forEach>
+    </div>
+
+		<%--<table class="table">
 			<thead>
 				<tr>
 					<th></th>
@@ -158,11 +181,10 @@
 					</tr>
 				</c:forEach>
 			</tbody>
-		</table>
-		</div>
+		</table> --%>
+
 	</div>
-		
-	</div><!-- container1 end -->
-	
+	<!-- container1 end -->
+
 </body>
 </html>
