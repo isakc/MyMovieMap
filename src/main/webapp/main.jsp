@@ -102,15 +102,9 @@ strong {
 													</c:when>
 
 													<c:when test="${movie.rankInten == 0 }">
-														<c:choose>
-															<c:when test="${movie.rankOldAndNew == 'NEW' }">
-																<span style="color: orange;">NEW</span>
-															</c:when>
-
-															<c:otherwise>
-																<i class="fas fa-minus"></i>
-															</c:otherwise>
-														</c:choose>
+														<c:if test="${movie.rankOldAndNew == 'NEW' }">
+															<span style="color: orange;">NEW</span>
+														</c:if>
 													</c:when>
 
 													<c:otherwise>

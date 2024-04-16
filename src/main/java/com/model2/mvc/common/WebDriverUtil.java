@@ -10,7 +10,8 @@ import org.springframework.util.ObjectUtils;
 
 @Component
 public class WebDriverUtil {
-    private static String WEB_DRIVER_PATH = "C:\\\\Users\\\\bitcamp\\\\Downloads\\\\chromedriver-win64\\\\chromedriver.exe"; // WebDriver 경로
+
+    private static String WEB_DRIVER_PATH; // WebDriver 경로
 
     public static WebDriver getChromeDriver() {
         if (ObjectUtils.isEmpty(System.getProperty("webdriver.chrome.driver"))) {
@@ -33,7 +34,7 @@ public class WebDriverUtil {
         return driver;
     }
 
-	//@Value("${common.chromeDriverPath}")
+	@Value("${common.chromeDriverPath}")
     public void initDriver(String path) {
         WEB_DRIVER_PATH = path;
     }

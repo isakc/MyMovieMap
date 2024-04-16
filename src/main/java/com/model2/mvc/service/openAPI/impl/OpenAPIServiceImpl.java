@@ -34,9 +34,9 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 	
 	///Field
 	@Value("${common.kobisAPIKey}")
-	String kobisAPIKey;
+	private String kobisAPIKey;
 	@Value("${common.kmdbAPIKey}")
-	String kmdbAPIKey;
+	private String kmdbAPIKey;
 	
 	HttpClient httpClient = HttpClients.createDefault();
 	WebDriver driver = WebDriverUtil.getChromeDriver();
