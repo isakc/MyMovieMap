@@ -169,23 +169,31 @@ VALUES ( 'user22', 'SCOTT', '2222', 'user', NULL, NULL, NULL, NULL, SYSDATE);
 INSERT INTO users 
 VALUES ( 'user23', 'SCOTT', '2323', 'user', NULL, NULL, NULL, NULL, SYSDATE);
 
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 0, '가전디지털', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 0, '스포츠/레저', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 0, '완구/취미', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3000, '노트북', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3000, '모니터', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3001, '자전거', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3001, '스키/겨울장비', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3001, '인라인 스케이트', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3002, '원예/가드닝', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 0, '티켓', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 0, '스낵음료', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 0, '굿즈', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3000, '일반 관람권', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3000, '특별관 관람권', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3001, '팝콘', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3001, '음료', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3001, '콤보', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3002, '기프트카드', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3002, '한정판', SYSDATE);
 
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'vaio vgn FS70B','소니 바이오 노트북 신동품','20120514',2000000, '3003', 5, TO_DATE('2012/12/14 11:27:27', 'YYYY/MM/DD HH24:MI:SS'));
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'자전거','자전거 좋아요~','20120514',10000, '3005',5, TO_DATE('2012/11/14 10:48:43', 'YYYY/MM/DD HH24:MI:SS'));
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'보르도','최고 디자인 신품','20120201',1170000, '3004',5, TO_DATE('2012/10/14 10:49:39', 'YYYY/MM/DD HH24:MI:SS'));
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'보드세트','한시즌 밖에 안썼습니다. 눈물을 머금고 내놓음 ㅠ.ㅠ','20120217', 200000, '3006',5, TO_DATE('2012/11/14 10:50:58', 'YYYY/MM/DD HH24:MI:SS'));
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'인라인','좋아욥','20120819', 20000, '3007',5, TO_DATE('2012/11/14 10:51:40', 'YYYY/MM/DD HH24:MI:SS'));
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'삼성센스 2G','sens 메모리 2Giga','20121121',800000, '3003',5, TO_DATE('2012/11/14 18:46:58', 'YYYY/MM/DD HH24:MI:SS'));
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'연꽃','정원을 가꿔보세요','20121022',232300, '3008',5, TO_DATE('2012/11/15 17:39:01', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'일반 관람권','유효기간: 구매일로부터 24개월 이내 사용 가능 예매 가능 유효기간은 구매일로부터 2년입니다.
+판매수량: 1회 8개 구매가능
+구매 후 취소: 구매일로부터 10일 이내 취소 가능하며, 부분취소는 불가능합니다.','20240417',10000, '3003', 100, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'Dolby Cinema 전용관람권',
+'유효기간: 구매일로부터 24개월 이내 사용 가능 예매 가능 유효기간은 구매일로부터 2년입니다.
+판매수량: 1회 8개 구매가능
+구매 후 취소: 구매일로부터 10일 이내 취소 가능하며, 부분취소는 불가능합니다.','20240417',18000, '3004', 100, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'더 부티크 전용관람권','유효기간: 구매일로부터 24개월 이내 사용 가능 예매 가능 유효기간은 구매일로부터 2년입니다.
+판매수량: 1회 8개 구매가능
+구매 후 취소: 구매일로부터 10일 이내 취소 가능하며, 부분취소는 불가능합니다.','20240417',15000, '3004',100, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'팝콘L','구매제한: 1인 1일 10매 유효기간: 스위트샵 상품권 24 개월','20240417', 6000, '3005',1000, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'콜라L','구매제한: 1인 1일 10매 유효기간: 스위트샵 상품권 24 개월','20240417', 3500, '3006',1000, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'더블콤보','구매제한: 1인 1일 10매 유효기간: 스위트샵 상품권 24 개월','20240417',15000, '3007',1000, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'CGV바캉스','상품구성충전형 선불 카드 유효기간: 구매 또는 최종 충전일로부터 5년','20240417',10000, '3008',100, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
 INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'삼성센스','노트북','20120212',600000, '3003',5, TO_DATE('2012/11/12 13:04:31', 'YYYY/MM/DD HH24:MI:SS'));
 
 INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'AHlbAAAAtBqyWAAA.jpg', 10000);

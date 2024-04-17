@@ -7,15 +7,12 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,10 +20,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model2.mvc.common.WebDriverUtil;
 import com.model2.mvc.service.domain.DailyBoxOffice;
-import com.model2.mvc.service.domain.Movie;
 import com.model2.mvc.service.openAPI.OpenAPIService;
 
 @Service("openAPIServiceImpl")
@@ -50,54 +47,36 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 	public List<DailyBoxOffice> getMoiveList() throws Exception {
 		Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DAY_OF_MONTH, -1);
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-	    String targetDt = dateFormat.format(cal.getTime()); //어제 날짜 가져오기
-	  
-		String apiURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key="+kobisAPIKey+"&targetDt="+targetDt;
+	    String targetDt = new SimpleDateFormat("yyyyMMdd").format(cal.getTime()); //어제 날짜 가져오기
+	    String result = null; //결과 가져오기
+	    List<DailyBoxOffice> dailyBoxOffices = new ArrayList<DailyBoxOffice>();
+		StringBuilder urlBuilder = new StringBuilder();
 		
-		URL url = new URL(apiURL);
+		urlBuilder.append("http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=");
+		urlBuilder.append(kobisAPIKey).append("&targetDt=").append(targetDt);
 		
-		BufferedReader bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
-
-		String result = bf.readLine();
+		result = readStreamToString(urlBuilder.toString());
 		
+		/*가져온 데이터 파싱하기*/
 		ObjectMapper mapper = new ObjectMapper();
-		HashMap<String,Object> dailyResult = mapper.readValue(result, HashMap.class);
-		HashMap<String, Object> boxOfficeResult = (HashMap<String, Object>) dailyResult.get("boxOfficeResult");
-		ArrayList<HashMap<String, Object>> dailyBoxOfficeList = (ArrayList<HashMap<String, Object>>) boxOfficeResult.get("dailyBoxOfficeList");
+        JsonNode rootNode = mapper.readTree(result);
+		JsonNode dailyBoxOfficeList = rootNode.path("boxOfficeResult").path("dailyBoxOfficeList");
 		
-		List<DailyBoxOffice> dailyBoxOffices = new ArrayList<>();
-		
-		for(HashMap<String, Object> movie: dailyBoxOfficeList) {
-			String movieNm =  ((String) movie.get("movieNm"));
-			String releaseDate =  ((String) movie.get("openDt")).replaceAll("-", "");
-			
-			StringBuilder urlBuilder = new StringBuilder("http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y"); /*URL*/
+		for(JsonNode movie: dailyBoxOfficeList) {
+			urlBuilder = new StringBuilder("http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y"); /*URL*/
 	        urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + kmdbAPIKey); /*Service Key*/
-	        urlBuilder.append("&" + URLEncoder.encode("query","UTF-8") + "=" + URLEncoder.encode(movieNm, "UTF-8")); /*영화이름*/
-	        urlBuilder.append("&" + URLEncoder.encode("releaseDts","UTF-8") + "=" + URLEncoder.encode(releaseDate, "UTF-8"));
+	        urlBuilder.append("&" + URLEncoder.encode("query","UTF-8") + "=" + URLEncoder.encode(movie.get("movieNm").asText(), "UTF-8")); /*영화이름*/
+	        urlBuilder.append("&" + URLEncoder.encode("releaseDts","UTF-8") + "=" + URLEncoder.encode(movie.get("openDt").asText().replaceAll("-", ""), "UTF-8"));//개봉날짜
 	        
-	        url = new URL(urlBuilder.toString());
+	        result = readStreamToString(urlBuilder.toString());
 	        
-	        bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
-	        
-	        StringBuilder sb = new StringBuilder();
-	        String line;
-	        while ((line = bf.readLine()) != null) {
-	            sb.append(line);
-	        }
-	        bf.close();
-	        
-	        JSONParser parser = new JSONParser();
-	        JSONObject jsonObject = (JSONObject) parser.parse(sb.toString());
-            JSONArray dataArray = (JSONArray) jsonObject.get("Data");
-            JSONObject dataObject = (JSONObject) dataArray.get(0);
-            JSONArray resultArray = (JSONArray) dataObject.get("Result");
-            JSONObject resultObject = (JSONObject) resultArray.get(0);
-            String posterPath = ((String) resultObject.get("posters")).split("\\|")[0];
-
+	        /*가져온 데이터 파싱하기*/
+	        rootNode = mapper.readTree(result);
+	        String postersUrl = rootNode.path("Data").get(0).path("Result").get(0).path("posters").asText();
+            
+	        /*일일박스오피스 DTO에 추가*/
 			DailyBoxOffice dailyBoxOffice = mapper.convertValue(movie, DailyBoxOffice.class);
-			dailyBoxOffice.setPosterPath(posterPath);
+			dailyBoxOffice.setPosterPath(Arrays.asList((postersUrl).split("\\|")));
 			dailyBoxOffices.add(dailyBoxOffice);
 		}
 		
@@ -105,7 +84,7 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 	}
 	
 	public void SeleniumTest() {
-		List<WebElement> webElementList = new ArrayList<>();
+		List<WebElement> webElementList = new ArrayList<WebElement>();
 		String url = "https://megabox.co.kr/event/detail?eventNo=15234";
 		String query = ".couponArea";
 
@@ -116,22 +95,26 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 		}
 	
 		WebElement parentElement = webElementList.get(0);
-//		List<WebElement> childElement = parentElement.findElements(By.tagName("a"));
-//
-//		for(int i=0; i<childElement.size(); i++) {
-//			System.out.println("이벤트 제목: " + childElement.get(i).findElement(By.className("tit")).getText());
-//			System.out.println("기간: " + childElement.get(i).findElement(By.className("date")).getText());
-//		}
-		
-		///////////////////////////////////////////////
-		List<WebElement> childElement = parentElement.findElements(By.className("numb"));
-		System.out.println("쿠폰 사용: " + childElement.get(0).getText());
-	}
+		List<WebElement> childElement = parentElement.findElements(By.tagName("a"));
 
-	@Override
-	public Movie getMovie() throws Exception {
+		for(int i=0; i<childElement.size(); i++) {
+			System.out.println("이벤트 제목: " + childElement.get(i).findElement(By.className("tit")).getText());
+			System.out.println("기간: " + childElement.get(i).findElement(By.className("date")).getText());
+		}
+	}
+	
+	public String readStreamToString(String urlString) throws Exception {
+		StringBuilder result = new StringBuilder();
+		URL url = new URL(urlString);
+		BufferedReader bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
 		
-		
-		return null;
+		String line;
+        while ((line = bf.readLine()) != null) {
+        	result.append(line);
+        }
+
+        bf.close();
+        
+		return result.toString(); 
 	}
 }

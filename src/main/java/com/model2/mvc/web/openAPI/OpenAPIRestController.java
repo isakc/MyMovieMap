@@ -35,7 +35,6 @@ public class OpenAPIRestController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
-			map.put("movie", openAPIService.getMovie());
 			map.put("message", "ok");
 		}catch (Exception e) {
 			map.put("message", "fail");

@@ -1,5 +1,7 @@
 package com.model2.mvc.service.domain;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,5 +35,5 @@ public class DailyBoxOffice {
     private String audiAcc;
     private String scrnCnt;
     private String showCnt;
-    private String posterPath;
+    private List<String> posterPath;
 }

@@ -11,6 +11,4 @@ public interface OpenAPIService {
 	public List<DailyBoxOffice> getMoiveList() throws Exception;
 	
 	public void SeleniumTest() throws Exception;
-	
-	public Movie getMovie() throws Exception;
 }
