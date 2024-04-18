@@ -44,7 +44,7 @@ CREATE TABLE categories(
 CREATE TABLE product ( 
 	prod_no 					NUMBER 				NOT NULL,
 	prod_name 				VARCHAR2(100) 	NOT NULL,
-	prod_detail 				VARCHAR2(200),
+	prod_detail 				VARCHAR2(1000),
 	manufacture_day	 VARCHAR2(8),
 	price 							NUMBER(10),
 	category_no NUMBER REFERENCES categories(category_no),
@@ -194,16 +194,16 @@ INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'팝콘L','구매제한: 1인 1
 INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'콜라L','구매제한: 1인 1일 10매 유효기간: 스위트샵 상품권 24 개월','20240417', 3500, '3006',1000, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
 INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'더블콤보','구매제한: 1인 1일 10매 유효기간: 스위트샵 상품권 24 개월','20240417',15000, '3007',1000, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
 INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'CGV바캉스','상품구성충전형 선불 카드 유효기간: 구매 또는 최종 충전일로부터 5년','20240417',10000, '3008',100, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'삼성센스','노트북','20120212',600000, '3003',5, TO_DATE('2012/11/12 13:04:31', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'오리지널 티켓','1인 4매 제한','20240418',20000, '3009',50, TO_DATE('2024/04/18 09:11:00', 'YYYY/MM/DD HH24:MI:SS'));
 
-INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'AHlbAAAAtBqyWAAA.jpg', 10000);
-INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'AHlbAAAAvetFNwAA.jpg', 10001);
-INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'AHlbAAAAvewfegAB.jpg', 10002);
-INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'AHlbAAAAve1WwgAC.jpg', 10003);
-INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'AHlbAAAAve37LwAD.jpg', 10004);
-INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'AHlbAAAAtBqyWAAA.jpg', 10005);
-INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'AHlbAAAAtDPSiQAA.jpg', 10006);
-INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'AHlbAAAAug1vsgAA.jpg', 10007);
+INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'OzjTPmOIAocfyQnas3x8Vo9JDRRnHeKf_280.png', 10000);
+INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'XxKX38rQAArz5GGaFCs7KwvYyUz5oQFC_280.png', 10001);
+INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'rxCDUuqHT9RostRRQYeu1mr1knFyHxWr_280.png', 10002);
+INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, '8827dc6093994a4ca3b70bce78b44fba.jpg', 10003);
+INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'c40b844a2e8b4bdc9f0f7131a4262ab6.jpg', 10004);
+INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, '9c05d8b90a04441fa151e5cc5f70bf07.jpg', 10005);
+INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, '16238872308620.jpg', 10006);
+INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'original_ticket_rain.jpg', 10007);
 
 
 commit;
