@@ -41,31 +41,31 @@ strong {
 
 <script type="text/javascript">
 	$(function () {
-		var infowindow = new kakao.maps.InfoWindow({zIndex:1}); // 마커 클릭 시 장소명을 표출할 인포윈도우
-		var mapContainer = document.getElementById('map'), // 지도 표시할 div 
-	    mapOption = { 
+		let infowindow = new kakao.maps.InfoWindow({zIndex:1}); // 마커 클릭 시 장소명을 표출할 인포윈도우
+		let mapContainer = document.getElementById('map'); // 지도 표시할 div 
+	    let mapOption = { 
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도 중심좌표
 	        level: 10 // 지도의 확대 레벨 
 	    };
-		
-		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
+		let map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
 		
 		if (navigator.geolocation) { // HTML5의 geolocation으로 사용 확인
 	    
 	    navigator.geolocation.getCurrentPosition(function(position) { // GeoLocation을 이용 접속 위치 얻기
-	     
 	    	let lat = position.coords.latitude; // 위도
 	    	let lon = position.coords.longitude; // 경도
-	        
-	        var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표 생성
-			var ps = new kakao.maps.services.Places();
-			var options = {
+	        let locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표 생성
+			let ps = new kakao.maps.services.Places();
+			let options = {
 			          location: locPosition,
-			          radius: 3000,
+			          radius: 5000,
 			          sort: kakao.maps.services.SortBy.DISTANCE,
+			          category_group_code: 'CT1'
 			        };
 			
-	        ps.keywordSearch('영화관', placesSearchCB, options); 
+	        ps.keywordSearch('CGV', placesSearchCB, options); 
+	        ps.keywordSearch('메가박스', placesSearchCB, options); 
+	        ps.keywordSearch('롯데시네마', placesSearchCB, options); 
 	      });
 		}// 현재 위치 얻기 end
 		
@@ -73,10 +73,10 @@ strong {
 			
 		    if (status === kakao.maps.services.Status.OK) {
 		    	
-		        var bounds = new kakao.maps.LatLngBounds(); // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해 LatLngBounds 객체에 좌표를 추가
-		        var listCinema = $("#listCinema");
+		        let bounds = new kakao.maps.LatLngBounds(); // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해 LatLngBounds 객체에 좌표를 추가
+		        let listCinema = $("#listCinema");
 		        
-		        for (var i=0; i<data.length; i++) {
+		        for (let i=0; i<data.length; i++) {
 		        	console.log(data[i]);
 		            displayMarker(data[i]);    
 		            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
@@ -89,7 +89,7 @@ strong {
 		
 		function displayMarker(place) { // 마커 표시 함수
 		    
-		    var marker = new kakao.maps.Marker({ // 마커생성, 표시
+		    let marker = new kakao.maps.Marker({ // 마커생성, 표시
 		        map: map,
 		        position: new kakao.maps.LatLng(place.y, place.x) 
 		    });
