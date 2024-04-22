@@ -22,7 +22,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- Bootstrap Dropdown Hover JS -->
 <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9bb092e55e04073df199c8fdf46abadd&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9bb092e55e04073df199c8fdf46abadd&libraries=services"></script><!-- 카카오 지도 -->
 
 <!--  CSS 추가 : 툴바에 화면 가리는 현상 해결 :  주석처리 전, 후 확인-->
 <style>
@@ -34,56 +34,73 @@ strong {
 	font-size: 25px;
 }
 
-.container {
+.aux {
 	padding-top: 35px;
 }
 </style>
 
 <script type="text/javascript">
 	$(function () {
-		// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-		var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		    mapOption = {
-		        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-		        level: 3 // 지도의 확대 레벨
-		    };  
-
-		// 지도를 생성합니다    
-		var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-		// 장소 검색 객체를 생성합니다
-		var ps = new kakao.maps.services.Places(map); 
-
-		// 카테고리로 은행을 검색합니다
-		ps.categorySearch('CT1', placesSearchCB, {useMapBounds:true}); 
-
-		// 키워드 검색 완료 시 호출되는 콜백함수 입니다
-		function placesSearchCB (data, status, pagination) {
+		var infowindow = new kakao.maps.InfoWindow({zIndex:1}); // 마커 클릭 시 장소명을 표출할 인포윈도우
+		var mapContainer = document.getElementById('map'), // 지도 표시할 div 
+	    mapOption = { 
+	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도 중심좌표
+	        level: 10 // 지도의 확대 레벨 
+	    };
+		
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
+		
+		if (navigator.geolocation) { // HTML5의 geolocation으로 사용 확인
+	    
+	    navigator.geolocation.getCurrentPosition(function(position) { // GeoLocation을 이용 접속 위치 얻기
+	     
+	    	let lat = position.coords.latitude; // 위도
+	    	let lon = position.coords.longitude; // 경도
+	        
+	        var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표 생성
+			var ps = new kakao.maps.services.Places();
+			var options = {
+			          location: locPosition,
+			          radius: 3000,
+			          sort: kakao.maps.services.SortBy.DISTANCE,
+			        };
+			
+	        ps.keywordSearch('영화관', placesSearchCB, options); 
+	      });
+		}// 현재 위치 얻기 end
+		
+		function placesSearchCB (data, status, pagination) { // 키워드 검색 완료 시 호출되는 콜백함수
+			
 		    if (status === kakao.maps.services.Status.OK) {
+		    	
+		        var bounds = new kakao.maps.LatLngBounds(); // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해 LatLngBounds 객체에 좌표를 추가
+		        var listCinema = $("#listCinema");
+		        
 		        for (var i=0; i<data.length; i++) {
+		        	console.log(data[i]);
 		            displayMarker(data[i]);    
+		            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+		            listCinema.append('<a href="'+data[i].place_url+'" target=_blank class="list-group-item list-group-item-action">'+data[i].place_name+'</a>');
 		        }       
-		    }
-		}
 
-		// 지도에 마커를 표시하는 함수입니다
-		function displayMarker(place) {
-		    // 마커를 생성하고 지도에 표시합니다
-		    var marker = new kakao.maps.Marker({
+		        map.setBounds(bounds); // 검색된 장소 위치를 기준으로 지도 범위를 재설정
+		    } 
+		}// placeSearchDB end
+		
+		function displayMarker(place) { // 마커 표시 함수
+		    
+		    var marker = new kakao.maps.Marker({ // 마커생성, 표시
 		        map: map,
 		        position: new kakao.maps.LatLng(place.y, place.x) 
 		    });
 
-		    // 마커에 클릭이벤트를 등록합니다
-		    kakao.maps.event.addListener(marker, 'click', function() {
-		        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-		        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+		    kakao.maps.event.addListener(marker, 'click', function() {  // 마커 클릭이벤트 등록
+		        
+		        infowindow.setContent('<div style="padding:5px; font-size:12px;">' + place.place_name + '</div>'); // 마커 클릭시 정보 출력
 		        infowindow.open(map, marker);
 		    });
-		}
-		
+		}//displayMarker end
+
 	})//function end
 </script>
 
@@ -97,7 +114,7 @@ strong {
 	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!-- 참조 : http://getbootstrap.com/css/   : container part..... -->
-	<div class="container">
+	<div class="container aux">
 	
     <div class="row">
     
@@ -173,13 +190,13 @@ strong {
 
 	</div>
 	<!-- container1 end -->
-
-	<div class="container">
-		<div id="map" style="width:500px;height:400px;"></div>
-	</div>
 	
-	<!-- /////////////////footer//////////////// -->
-	<jsp:include page="/layout/footer.jsp" />
-	<!-- /////////////////////////////////////// -->	
+	<div class="container aux">
+		<strong>내 근처 영화관</strong>
+		<div class="row">
+			<div id="map" class="col-md-10" style="width:900px; height:700px;"></div>
+			<div id="listCinema" class="col-md-2 list-group"></div>
+		</div>
+	</div>
 </body>
 </html>
