@@ -45,7 +45,7 @@ strong {
 		let mapContainer = document.getElementById('map'); // 지도 표시할 div 
 	    let mapOption = { 
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도 중심좌표
-	        level: 10 // 지도의 확대 레벨 
+	        level: 3 // 지도의 확대 레벨 
 	    };
 		let map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
 		
@@ -96,7 +96,7 @@ strong {
 
 		    kakao.maps.event.addListener(marker, 'click', function() {  // 마커 클릭이벤트 등록
 		        
-		        infowindow.setContent('<div style="padding:5px; font-size:12px;">' + place.place_name + '</div>'); // 마커 클릭시 정보 출력
+		        infowindow.setContent('<div style="padding:5px; font-size:12px;">' + place.place_name + '</div>' + '<div>'+place.distance+'M </div>'); // 마커 클릭시 정보 출력
 		        infowindow.open(map, marker);
 		    });
 		}//displayMarker end
