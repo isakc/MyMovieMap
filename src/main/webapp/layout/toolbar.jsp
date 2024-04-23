@@ -24,8 +24,7 @@
 		<!-- toolBar Button End //////////////////////// -->
 		
 	    <!--  dropdown hover Start -->
-		<div 	class="collapse navbar-collapse" id="target" 
-	       			data-hover="dropdown" data-animations="fadeInDownNew fadeInRightNew fadeInUpNew fadeInLeftNew">
+		<div class="collapse navbar-collapse" id="target" data-hover="dropdown" data-animations="fadeInDownNew fadeInRightNew fadeInUpNew fadeInLeftNew">
 	         
 	         	<!-- Tool Bar 를 다양하게 사용하면.... -->
 	             <ul class="nav navbar-nav">
@@ -100,7 +99,6 @@
 		                     </ul>
 		                </li>
 	                 </c:if>
-	                 
 	             </ul>
 	             
 	             <c:choose>
