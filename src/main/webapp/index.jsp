@@ -75,7 +75,6 @@
 				        let listCinema = $("#listCinema");
 				        
 				        for (let i=0; i<data.length; i++) {
-				        	console.log(data[i]);
 				            displayMarker(data[i]);    
 				            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
 				            listCinema.append('<a href="'+data[i].place_url+'" target=_blank class="list-group-item list-group-item-action">'+data[i].place_name+'</a>');
