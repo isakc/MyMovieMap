@@ -117,7 +117,7 @@ public class UserRestController {
 	}
 	
 	@RequestMapping(value= "json/login", method = RequestMethod.POST)
-	public Map<String, Object> login(@RequestBody User user, HttpSession session) throws Exception {
+	public Map<String, Object> login(@RequestBody User user) throws Exception {
 
 		System.out.println("/user/json/login: POST");
 
@@ -125,7 +125,6 @@ public class UserRestController {
 		
 		try {
 			User dbUser = userService.loginUser(user);
-			session.setAttribute("user", dbUser);
 			
 			map.put("user", dbUser);
 			map.put("message", "ok");

@@ -38,19 +38,18 @@
 				self.location = "/product/listProduct/search"
 			});
 			
-			$(function () {
-				let infowindow = new kakao.maps.InfoWindow({zIndex:1}); // 마커 클릭 시 장소명을 표출할 인포윈도우
-				let mapContainer = document.getElementById('map'); // 지도 표시할 div 
-			    let mapOption = { 
-			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도 중심좌표
-			        level: 3 // 지도의 확대 레벨 
-			    };
-				let map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
+			let infowindow = new kakao.maps.InfoWindow({zIndex:1}); // 마커 클릭 시 장소명을 표출할 인포윈도우
+			let mapContainer = document.getElementById('map'); // 지도 표시할 div 
+			let mapOption = {
+					center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도 중심좌표
+					level: 3 // 지도의 확대 레벨
+				};
+			let map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
 				
-				if (navigator.geolocation) { // HTML5의 geolocation으로 사용 확인
-			    
-			    navigator.geolocation.getCurrentPosition(function(position) { // GeoLocation을 이용 접속 위치 얻기
-			    	let lat = position.coords.latitude; // 위도
+			if (navigator.geolocation) { // HTML5의 geolocation으로 사용 확인
+				
+				navigator.geolocation.getCurrentPosition(function(position) { // GeoLocation을 이용 접속 위치 얻기
+					let lat = position.coords.latitude; // 위도
 			    	let lon = position.coords.longitude; // 경도
 			        let locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표 생성
 					let ps = new kakao.maps.services.Places();
@@ -61,9 +60,9 @@
 					          category_group_code: 'CT1'
 					        };
 					
-			        ps.keywordSearch('CGV', placesSearchCB, options); 
-			        ps.keywordSearch('메가박스', placesSearchCB, options); 
-			        ps.keywordSearch('롯데시네마', placesSearchCB, options); 
+			        ps.keywordSearch('CGV', placesSearchCB, options);
+			        ps.keywordSearch('메가박스', placesSearchCB, options);
+			        ps.keywordSearch('롯데시네마', placesSearchCB, options);
 			      });
 				}// 현재 위치 얻기 end
 				
@@ -77,6 +76,7 @@
 				        for (let i=0; i<data.length; i++) {
 				            displayMarker(data[i]);    
 				            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+				            
 				            listCinema.append('<a href="'+data[i].place_url+'" target=_blank class="list-group-item list-group-item-action">'+data[i].place_name+'</a>');
 				        }       
 
@@ -98,7 +98,6 @@
 				    });
 				}//displayMarker end
 
-			})//function end
 		});
 		
 	</script>
