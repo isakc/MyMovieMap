@@ -14,10 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.model2.mvc.service.cart.CartService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration	(locations = {	"classpath:config/context-common.xml",
-		"classpath:config/context-aspect.xml",
-		"classpath:config/context-mybatis.xml",
-		"classpath:config/context-transaction.xml" })
 public class CartServiceTest {
 
 	//==>@RunWith,@ContextConfiguration ภฬฟ๋ Wiring, Test วา instance DI

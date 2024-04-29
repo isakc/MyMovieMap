@@ -17,10 +17,6 @@ import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.product.ProductService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration	(locations = {	"classpath:config/context-common.xml",
-		"classpath:config/context-aspect.xml",
-		"classpath:config/context-mybatis.xml",
-		"classpath:config/context-transaction.xml" })
 public class ProductServiceTest {
 
 	//==>@RunWith,@ContextConfiguration ภฬฟ๋ Wiring, Test วา instance DI
