@@ -76,6 +76,7 @@
 				        for (let i=0; i<data.length; i++) {
 				            displayMarker(data[i]);    
 				            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+				            getSchedule(data[i].place_url);
 				            
 				            listCinema.append('<a href="'+data[i].place_url+'" target=_blank class="list-group-item list-group-item-action">'+data[i].place_name+'</a>');
 				        }       
@@ -97,6 +98,24 @@
 				        infowindow.open(map, marker);
 				    });
 				}//displayMarker end
+				
+				
+				function getSchedule(url) {
+					$.ajax({
+						url: "/openAPI/json/getSchedule/",
+						method: "POST",
+						data: url,
+						headers: {
+							"Accept": "application/json",
+							"Content-Type": "application/json"
+						},
+						data: url,
+						
+						success: function(data) {							
+								console.log(data);
+							}
+						});
+				}//크롤링으로 얻어오기
 
 		});
 		
@@ -217,15 +236,18 @@
 					<div id="map" class="col-md-10" style="width:700px; height:500px;"></div>
 					<div id="listCinema" class="col-md-2 list-group"></div>
 				</div>
+				
+				<div id="schedule">
+					나는 테스트중
+				</div>
 			</div>
-	   	 	<!--  Main end /////////////////////////////////////-->   		
+	   	 	<!--  Main end /////////////////////////////////////--> 
 	 	 	
 		</div>
 		<!-- 다단레이아웃(row) end /////////////////////////////////////-->
 		
 	</div>
 	<!--  화면구성(container div) end /////////////////////////////////////-->
-	
 </body>
 
 </html>

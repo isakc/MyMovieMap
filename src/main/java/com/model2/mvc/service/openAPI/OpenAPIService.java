@@ -10,5 +10,5 @@ public interface OpenAPIService {
 	//selectList
 	public List<DailyBoxOffice> getMoiveList() throws Exception;
 	
-	public void SeleniumTest() throws Exception;
+	public String getSchedule(String url) throws Exception;
 }

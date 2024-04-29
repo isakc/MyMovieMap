@@ -2,6 +2,7 @@ package com.model2.mvc.service.openAPI.impl;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.runtime.SwitchBootstraps;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -98,24 +99,30 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 		return dailyBoxOffices;
 	}
 	
-	public void SeleniumTest() {
-		List<WebElement> webElementList = new ArrayList<WebElement>();
-		String url = "https://megabox.co.kr/event/detail?eventNo=15234";
-		String query = ".couponArea";
-
+	public String getSchedule(String url) {
+		String query = "";
+		String homepageUrl = "";
+		String box = "";
+		
 		if (!ObjectUtils.isEmpty(driver)) {
 		    driver.get(url);
 		    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		    webElementList = driver.findElements(By.cssSelector(query));
+		    homepageUrl = driver.findElement(By.cssSelector(".location_present > a")).getAttribute("href");
 		}
-	
-		WebElement parentElement = webElementList.get(0);
-		List<WebElement> childElement = parentElement.findElements(By.tagName("a"));
+		
+		if(url.contains("cgv")) {
+			query = ".sect-showtimes";
+		}else if(url.contains("megabox")) {
+			query = ".theater-list-box";
+		}else {
+			query = ".mCustomScrollbar";
+		}
 
-		for(int i=0; i<childElement.size(); i++) {
-			System.out.println("이벤트 제목: " + childElement.get(i).findElement(By.className("tit")).getText());
-			System.out.println("기간: " + childElement.get(i).findElement(By.className("date")).getText());
-		}
+		driver.get(homepageUrl);
+		String test = driver.getPageSource();
+		//box = driver.findElement(By.cssSelector(query)).getAttribute("outerHTML");
+		
+		return box;
 	}
 	
 	public String readStreamToString(String urlString) throws Exception {
