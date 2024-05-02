@@ -72,7 +72,6 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 	        if(nation.equals("한국")) {
 	        	nation = "대한민국";
 	        }
-	        String createDts = rootNode.path("movieInfoResult").path("movieInfo").path("prdtYear").asText();
 	        String director = rootNode.path("movieInfoResult").path("movieInfo").path("directors").get(0) != null ? rootNode.path("movieInfoResult").path("movieInfo").path("directors").get(0).path("peopleNm").asText() : "";
 			
 			urlBuilder = new StringBuilder("http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y"); /*URL*/
