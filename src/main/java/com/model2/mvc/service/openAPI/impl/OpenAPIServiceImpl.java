@@ -2,7 +2,6 @@ package com.model2.mvc.service.openAPI.impl;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.lang.runtime.SwitchBootstraps;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -36,7 +35,7 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 	private String kmdbAPIKey;
 	
 	HttpURLConnection httpCon = null;
-	WebDriver driver = WebDriverUtil.getChromeDriver();
+	//WebDriver driver = WebDriverUtil.getChromeDriver();
 	
 	///Constructor
 	public OpenAPIServiceImpl() {
@@ -69,7 +68,7 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 			result = readStreamToString(urlBuilder.toString());
 			
 			rootNode = mapper.readTree(result);
-	        String nation = rootNode.path("movieInfoResult").path("movieInfo").path("nations").get(0).path("nationNm").asText();
+	        String nation = rootNode.path("movieInfoResult").path("movieInfo").path("nations").get(0).path("nationNm").asText().trim();
 	        if(nation.equals("한국")) {
 	        	nation = "대한민국";
 	        }
@@ -81,7 +80,6 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 	        urlBuilder.append("&" + URLEncoder.encode("title","UTF-8") + "=" + URLEncoder.encode(movie.get("movieNm").asText(), "UTF-8")); /*영화이름*/
 	        urlBuilder.append("&" + URLEncoder.encode("releaseDts","UTF-8") + "=" + URLEncoder.encode(movie.get("openDt").asText().replaceAll("-", ""), "UTF-8"));//개봉날짜
 	        urlBuilder.append("&" + URLEncoder.encode("nation","UTF-8") + "=" + URLEncoder.encode(nation, "UTF-8"));//개봉날짜
-	        urlBuilder.append("&" + URLEncoder.encode("createDts","UTF-8") + "=" + URLEncoder.encode(createDts, "UTF-8"));//제작연도
 	        urlBuilder.append("&" + URLEncoder.encode("director","UTF-8") + "=" + URLEncoder.encode(director, "UTF-8"));//감독이름
 	        
 	        result = readStreamToString(urlBuilder.toString());
@@ -104,23 +102,23 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 		String homepageUrl = "";
 		String box = "";
 		
-		if (!ObjectUtils.isEmpty(driver)) {
-		    driver.get(url);
-		    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		    homepageUrl = driver.findElement(By.cssSelector(".location_present > a")).getAttribute("href");
-		}
-		
-		if(url.contains("cgv")) {
-			query = ".sect-showtimes";
-		}else if(url.contains("megabox")) {
-			query = ".theater-list-box";
-		}else {
-			query = ".mCustomScrollbar";
-		}
-
-		driver.get(homepageUrl);
-		String test = driver.getPageSource();
-		//box = driver.findElement(By.cssSelector(query)).getAttribute("outerHTML");
+//		if (!ObjectUtils.isEmpty(driver)) {
+//		    driver.get(url);
+//		    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+//		    homepageUrl = driver.findElement(By.cssSelector(".location_present > a")).getAttribute("href");
+//		}
+//		
+//		if(url.contains("cgv")) {
+//			query = ".sect-showtimes";
+//		}else if(url.contains("megabox")) {
+//			query = ".theater-list-box";
+//		}else {
+//			query = ".mCustomScrollbar";
+//		}
+//
+//		driver.get(homepageUrl);
+//		String test = driver.getPageSource();
+//		//box = driver.findElement(By.cssSelector(query)).getAttribute("outerHTML");
 		
 		return box;
 	}
