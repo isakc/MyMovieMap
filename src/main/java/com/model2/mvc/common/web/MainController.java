@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 /*
  * Welcome Page  : 여러가지 방법중 Controller 로 만듬.
  */
-@Controller
+@Controller("MainController")
 public class MainController {
 	
 	///Constructor
