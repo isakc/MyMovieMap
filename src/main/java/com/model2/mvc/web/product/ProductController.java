@@ -154,14 +154,16 @@ public class ProductController {
 		String root = request.getServletContext().getRealPath("/images/uploadFiles")+File.separator;
 		List<String> fileNames = new ArrayList<String>();
 		
-		for (MultipartFile upload : uploads) {
-			 UUID uuid = UUID.randomUUID();
-		        
-			 String fileName = uuid+"_"+upload.getOriginalFilename();
-			 fileNames.add(fileName);
-		     File destFile = new File(root + fileName);
-		     upload.transferTo(destFile);
-		 }
+		if( !(uploads.get(0).isEmpty())) {
+			for (MultipartFile upload : uploads) {
+				 UUID uuid = UUID.randomUUID();
+			        
+				 String fileName = uuid+"_"+upload.getOriginalFilename();
+				 fileNames.add(fileName);
+			     File destFile = new File(root + fileName);
+			     upload.transferTo(destFile);
+			 }
+		}
 		
 		product.setManuDate(product.getManuDate().replace("-", ""));
 		product.setCategory(categoryService.findCategory(categoryNo));

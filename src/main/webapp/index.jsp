@@ -59,10 +59,10 @@
 					          sort: kakao.maps.services.SortBy.DISTANCE,
 					          category_group_code: 'CT1'
 					        };
-					
+
+			        ps.keywordSearch('롯데시네마', placesSearchCB, options);
 			        ps.keywordSearch('CGV', placesSearchCB, options);
 			        ps.keywordSearch('메가박스', placesSearchCB, options);
-			        ps.keywordSearch('롯데시네마', placesSearchCB, options);
 			      });
 				}// 현재 위치 얻기 end
 				
