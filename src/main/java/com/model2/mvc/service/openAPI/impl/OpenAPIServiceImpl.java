@@ -68,21 +68,22 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 			result = readStreamToString(urlBuilder.toString());
 			
 			rootNode = mapper.readTree(result);
-	        String nation = rootNode.path("movieInfoResult").path("movieInfo").path("nations").get(0).path("nationNm").asText().trim();
-	        String nationQuery = (nation.contains("한국") ? "대한민국" : nation);
+	        //String nation = rootNode.path("movieInfoResult").path("movieInfo").path("nations").get(0).path("nationNm").asText().trim();
+	        //String nationQuery = (nation.contains("한국") ? "대한민국" : nation);
 	        String director = rootNode.path("movieInfoResult").path("movieInfo").path("directors").get(0) != null ? rootNode.path("movieInfoResult").path("movieInfo").path("directors").get(0).path("peopleNm").asText() : "";
 			
 			urlBuilder = new StringBuilder("http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y"); /*URL*/
 	        urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + kmdbAPIKey); /*Service Key*/
 	        urlBuilder.append("&" + URLEncoder.encode("title","UTF-8") + "=" + URLEncoder.encode(movie.get("movieNm").asText(), "UTF-8")); /*영화이름*/
 	        urlBuilder.append("&" + URLEncoder.encode("releaseDts","UTF-8") + "=" + URLEncoder.encode(movie.get("openDt").asText().replaceAll("-", ""), "UTF-8"));//개봉날짜
-	        urlBuilder.append("&" + URLEncoder.encode("nation","UTF-8") + "=" + URLEncoder.encode(nationQuery, "UTF-8"));//개봉날짜
+	        //urlBuilder.append("&" + URLEncoder.encode("nation","UTF-8") + "=" + URLEncoder.encode(nationQuery, "UTF-8"));//개봉날짜
 	        urlBuilder.append("&" + URLEncoder.encode("director","UTF-8") + "=" + URLEncoder.encode(director, "UTF-8"));//감독이름
 	        
 	        result = readStreamToString(urlBuilder.toString());
 	        
 	        /*가져온 데이터 파싱하기*/
 	        rootNode = mapper.readTree(result);
+	        System.out.println(movie.get("movieNm").asText());
 	        String postersUrl = rootNode.path("Data").get(0).path("Result").get(0).path("posters").asText();
             
 	        /*일일박스오피스 DTO에 추가*/
