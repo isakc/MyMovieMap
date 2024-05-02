@@ -26,7 +26,8 @@ public class WebConfig implements WebMvcConfigurer {
 	
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
-        .allowedOrigins("http://localhost:3000", "http://127.0.0.1:3000") // 모든 도메인 허용, 필요에 따라 수정
+        //.allowedOrigins("http://localhost:3000", "http://127.0.0.1:3000") // 모든 도메인 허용, 필요에 따라 수정
+		.allowedOriginPatterns("*")
         .allowedMethods("GET", "POST", "PUT", "DELETE") // 허용할 HTTP 메서드 지정
         .allowCredentials(true) // 클라이언트 쿠키를 전송하기 위한 허용 여부
         .maxAge(3600); // preflight 요청을 캐시할 시간 설정 (초 단위)

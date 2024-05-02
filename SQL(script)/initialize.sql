@@ -94,7 +94,7 @@ CREATE TABLE productImages(
 
 INSERT 
 INTO users ( user_id, user_name, password, role, ssn, cell_phone, addr, email, reg_date ) 
-VALUES ( 'admin', 'admin', '1234', 'admin', NULL, NULL, '¼­¿ï½Ã ¼­ÃÊ±¸', 'admin@mvc.com',TO_DATE('2012/01/14 10:48:43', 'YYYY/MM/DD HH24:MI:SS')); 
+VALUES ( 'admin', 'admin', '1234', 'admin', NULL, NULL, 'ì„œìš¸ì‹œ ì„œì´ˆêµ¬', 'admin@mvc.com',TO_DATE('2012/01/14 10:48:43', 'YYYY/MM/DD HH24:MI:SS')); 
 
 INSERT 
 INTO users ( user_id, user_name, password, role, ssn, cell_phone, addr, email, reg_date ) 
@@ -169,32 +169,32 @@ VALUES ( 'user22', 'SCOTT', '2222', 'user', NULL, NULL, NULL, NULL, SYSDATE);
 INSERT INTO users 
 VALUES ( 'user23', 'SCOTT', '2323', 'user', NULL, NULL, NULL, NULL, SYSDATE);
 
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 0, 'Æ¼ÄÏ', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 0, '½º³¼À½·á', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 0, '±ÂÁî', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3000, 'ÀÏ¹Ý °ü¶÷±Ç', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3000, 'Æ¯º°°ü °ü¶÷±Ç', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3001, 'ÆËÄÜ', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3001, 'À½·á', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3001, 'ÄÞº¸', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3002, '±âÇÁÆ®Ä«µå', SYSDATE);
-INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3002, 'ÇÑÁ¤ÆÇ', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 0, 'í‹°ì¼“', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 0, 'ìŠ¤ë‚µìŒë£Œ', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 0, 'êµ¿ì¦ˆ', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3000, 'ì¼ë°˜ ê´€ëžŒê¶Œ', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3000, 'íŠ¹ë³„ê´€ ê´€ëžŒê¶Œ', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3001, 'íŒì½˜', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3001, 'ìŒë£Œ', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3001, 'ì½¤ë³´', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3002, 'ê¸°í”„íŠ¸ì¹´ë“œ', SYSDATE);
+INSERT INTO categories VALUES(seq_categories_category_no.NEXTVAL, 3002, 'í•œì •íŒ', SYSDATE);
 
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'ÀÏ¹Ý °ü¶÷±Ç','À¯È¿±â°£: ±¸¸ÅÀÏ·ÎºÎÅÍ 24°³¿ù ÀÌ³» »ç¿ë °¡´É ¿¹¸Å °¡´É À¯È¿±â°£Àº ±¸¸ÅÀÏ·ÎºÎÅÍ 2³âÀÔ´Ï´Ù.
-ÆÇ¸Å¼ö·®: 1È¸ 8°³ ±¸¸Å°¡´É
-±¸¸Å ÈÄ Ãë¼Ò: ±¸¸ÅÀÏ·ÎºÎÅÍ 10ÀÏ ÀÌ³» Ãë¼Ò °¡´ÉÇÏ¸ç, ºÎºÐÃë¼Ò´Â ºÒ°¡´ÉÇÕ´Ï´Ù.','20240417',10000, '3003', 100, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'Dolby Cinema Àü¿ë°ü¶÷±Ç',
-'À¯È¿±â°£: ±¸¸ÅÀÏ·ÎºÎÅÍ 24°³¿ù ÀÌ³» »ç¿ë °¡´É ¿¹¸Å °¡´É À¯È¿±â°£Àº ±¸¸ÅÀÏ·ÎºÎÅÍ 2³âÀÔ´Ï´Ù.
-ÆÇ¸Å¼ö·®: 1È¸ 8°³ ±¸¸Å°¡´É
-±¸¸Å ÈÄ Ãë¼Ò: ±¸¸ÅÀÏ·ÎºÎÅÍ 10ÀÏ ÀÌ³» Ãë¼Ò °¡´ÉÇÏ¸ç, ºÎºÐÃë¼Ò´Â ºÒ°¡´ÉÇÕ´Ï´Ù.','20240417',18000, '3004', 100, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'´õ ºÎÆ¼Å© Àü¿ë°ü¶÷±Ç','À¯È¿±â°£: ±¸¸ÅÀÏ·ÎºÎÅÍ 24°³¿ù ÀÌ³» »ç¿ë °¡´É ¿¹¸Å °¡´É À¯È¿±â°£Àº ±¸¸ÅÀÏ·ÎºÎÅÍ 2³âÀÔ´Ï´Ù.
-ÆÇ¸Å¼ö·®: 1È¸ 8°³ ±¸¸Å°¡´É
-±¸¸Å ÈÄ Ãë¼Ò: ±¸¸ÅÀÏ·ÎºÎÅÍ 10ÀÏ ÀÌ³» Ãë¼Ò °¡´ÉÇÏ¸ç, ºÎºÐÃë¼Ò´Â ºÒ°¡´ÉÇÕ´Ï´Ù.','20240417',15000, '3004',100, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'ÆËÄÜL','±¸¸ÅÁ¦ÇÑ: 1ÀÎ 1ÀÏ 10¸Å À¯È¿±â°£: ½ºÀ§Æ®¼¥ »óÇ°±Ç 24 °³¿ù','20240417', 6000, '3005',1000, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'ÄÝ¶óL','±¸¸ÅÁ¦ÇÑ: 1ÀÎ 1ÀÏ 10¸Å À¯È¿±â°£: ½ºÀ§Æ®¼¥ »óÇ°±Ç 24 °³¿ù','20240417', 3500, '3006',1000, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'´õºíÄÞº¸','±¸¸ÅÁ¦ÇÑ: 1ÀÎ 1ÀÏ 10¸Å À¯È¿±â°£: ½ºÀ§Æ®¼¥ »óÇ°±Ç 24 °³¿ù','20240417',15000, '3007',1000, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'CGV¹ÙÄ²½º','»óÇ°±¸¼ºÃæÀüÇü ¼±ºÒ Ä«µå À¯È¿±â°£: ±¸¸Å ¶Ç´Â ÃÖÁ¾ ÃæÀüÀÏ·ÎºÎÅÍ 5³â','20240417',10000, '3008',100, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
-INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'¿À¸®Áö³Î Æ¼ÄÏ','1ÀÎ 4¸Å Á¦ÇÑ','20240418',20000, '3009',50, TO_DATE('2024/04/18 09:11:00', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'ì¼ë°˜ ê´€ëžŒê¶Œ','ìœ íš¨ê¸°ê°„: êµ¬ë§¤ì¼ë¡œë¶€í„° 24ê°œì›” ì´ë‚´ ì‚¬ìš© ê°€ëŠ¥ ì˜ˆë§¤ ê°€ëŠ¥ ìœ íš¨ê¸°ê°„ì€ êµ¬ë§¤ì¼ë¡œë¶€í„° 2ë…„ìž…ë‹ˆë‹¤.
+íŒë§¤ìˆ˜ëŸ‰: 1íšŒ 8ê°œ êµ¬ë§¤ê°€ëŠ¥
+êµ¬ë§¤ í›„ ì·¨ì†Œ: êµ¬ë§¤ì¼ë¡œë¶€í„° 10ì¼ ì´ë‚´ ì·¨ì†Œ ê°€ëŠ¥í•˜ë©°, ë¶€ë¶„ì·¨ì†ŒëŠ” ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤.','20240417',10000, '3003', 100, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'Dolby Cinema ì „ìš©ê´€ëžŒê¶Œ',
+'ìœ íš¨ê¸°ê°„: êµ¬ë§¤ì¼ë¡œë¶€í„° 24ê°œì›” ì´ë‚´ ì‚¬ìš© ê°€ëŠ¥ ì˜ˆë§¤ ê°€ëŠ¥ ìœ íš¨ê¸°ê°„ì€ êµ¬ë§¤ì¼ë¡œë¶€í„° 2ë…„ìž…ë‹ˆë‹¤.
+íŒë§¤ìˆ˜ëŸ‰: 1íšŒ 8ê°œ êµ¬ë§¤ê°€ëŠ¥
+êµ¬ë§¤ í›„ ì·¨ì†Œ: êµ¬ë§¤ì¼ë¡œë¶€í„° 10ì¼ ì´ë‚´ ì·¨ì†Œ ê°€ëŠ¥í•˜ë©°, ë¶€ë¶„ì·¨ì†ŒëŠ” ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤.','20240417',18000, '3004', 100, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'ë” ë¶€í‹°í¬ ì „ìš©ê´€ëžŒê¶Œ','ìœ íš¨ê¸°ê°„: êµ¬ë§¤ì¼ë¡œë¶€í„° 24ê°œì›” ì´ë‚´ ì‚¬ìš© ê°€ëŠ¥ ì˜ˆë§¤ ê°€ëŠ¥ ìœ íš¨ê¸°ê°„ì€ êµ¬ë§¤ì¼ë¡œë¶€í„° 2ë…„ìž…ë‹ˆë‹¤.
+íŒë§¤ìˆ˜ëŸ‰: 1íšŒ 8ê°œ êµ¬ë§¤ê°€ëŠ¥
+êµ¬ë§¤ í›„ ì·¨ì†Œ: êµ¬ë§¤ì¼ë¡œë¶€í„° 10ì¼ ì´ë‚´ ì·¨ì†Œ ê°€ëŠ¥í•˜ë©°, ë¶€ë¶„ì·¨ì†ŒëŠ” ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤.','20240417',15000, '3004',100, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'íŒì½˜L','êµ¬ë§¤ì œí•œ: 1ì¸ 1ì¼ 10ë§¤ ìœ íš¨ê¸°ê°„: ìŠ¤ìœ„íŠ¸ìƒµ ìƒí’ˆê¶Œ 24 ê°œì›”','20240417', 6000, '3005',1000, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'ì½œë¼L','êµ¬ë§¤ì œí•œ: 1ì¸ 1ì¼ 10ë§¤ ìœ íš¨ê¸°ê°„: ìŠ¤ìœ„íŠ¸ìƒµ ìƒí’ˆê¶Œ 24 ê°œì›”','20240417', 3500, '3006',1000, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'ë”ë¸”ì½¤ë³´','êµ¬ë§¤ì œí•œ: 1ì¸ 1ì¼ 10ë§¤ ìœ íš¨ê¸°ê°„: ìŠ¤ìœ„íŠ¸ìƒµ ìƒí’ˆê¶Œ 24 ê°œì›”','20240417',15000, '3007',1000, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'CGVë°”ìº‰ìŠ¤','ìƒí’ˆêµ¬ì„±ì¶©ì „í˜• ì„ ë¶ˆ ì¹´ë“œ ìœ íš¨ê¸°ê°„: êµ¬ë§¤ ë˜ëŠ” ìµœì¢… ì¶©ì „ì¼ë¡œë¶€í„° 5ë…„','20240417',10000, '3008',100, TO_DATE('2024/04/17 21:15:00', 'YYYY/MM/DD HH24:MI:SS'));
+INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,'ì˜¤ë¦¬ì§€ë„ í‹°ì¼“','1ì¸ 4ë§¤ ì œí•œ','20240418',20000, '3009',50, TO_DATE('2024/04/18 09:11:00', 'YYYY/MM/DD HH24:MI:SS'));
 
 INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'OzjTPmOIAocfyQnas3x8Vo9JDRRnHeKf_280.png', 10000);
 INSERT INTO productImages VALUES (seq_productImages_img_no.NEXTVAL, 'XxKX38rQAArz5GGaFCs7KwvYyUz5oQFC_280.png', 10001);
