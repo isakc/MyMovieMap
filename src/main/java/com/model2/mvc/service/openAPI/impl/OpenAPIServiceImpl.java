@@ -12,9 +12,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+//import org.openqa.selenium.By;
+//import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -35,7 +35,7 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 	private String kmdbAPIKey;
 	
 	HttpURLConnection httpCon = null;
-	WebDriver driver = WebDriverUtil.getChromeDriver();
+	//WebDriver driver = WebDriverUtil.getChromeDriver();
 	
 	///Constructor
 	public OpenAPIServiceImpl() {
@@ -103,23 +103,23 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 		String homepageUrl = "";
 		String box = "";
 		
-		if (!ObjectUtils.isEmpty(driver)) {
-		    driver.get(url);
-		    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		    homepageUrl = driver.findElement(By.cssSelector(".location_present > a")).getAttribute("href");
-		}
-		
-		if(url.contains("cgv")) {
-			query = ".sect-showtimes";
-		}else if(url.contains("megabox")) {
-			query = ".theater-list-box";
-		}else {
-			query = ".mCustomScrollbar";
-		}
-
-		driver.get(homepageUrl);
-		String test = driver.getPageSource();
-		//box = driver.findElement(By.cssSelector(query)).getAttribute("outerHTML");
+//		if (!ObjectUtils.isEmpty(driver)) {
+//		    driver.get(url);
+//		    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+//		    homepageUrl = driver.findElement(By.cssSelector(".location_present > a")).getAttribute("href");
+//		}
+//		
+//		if(url.contains("cgv")) {
+//			query = ".sect-showtimes";
+//		}else if(url.contains("megabox")) {
+//			query = ".theater-list-box";
+//		}else {
+//			query = ".mCustomScrollbar";
+//		}
+//
+//		driver.get(homepageUrl);
+//		String test = driver.getPageSource();
+//		//box = driver.findElement(By.cssSelector(query)).getAttribute("outerHTML");
 		
 		return box;
 	}
