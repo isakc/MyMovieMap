@@ -117,7 +117,7 @@ public class UserController {
 			session.setAttribute("user", dbUser);
 		}
 
-		return "redirect:/openAPI/main";
+		return "redirect:/index.jsp";
 	}
 	
 	@RequestMapping(value="logout", method = RequestMethod.GET)

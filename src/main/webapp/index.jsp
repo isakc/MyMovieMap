@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=euc-kr" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%--  <c:if test="${ ! empty user }">
+ <c:if test="${ ! empty user }">
  	<jsp:forward page="/openAPI/main"/>
- </c:if> --%>
+ </c:if>
  
 <html>
 <head>
