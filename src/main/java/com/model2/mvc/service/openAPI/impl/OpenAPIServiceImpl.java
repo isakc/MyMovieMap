@@ -83,10 +83,6 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 	        
 	        /*가져온 데이터 파싱하기*/
 	        rootNode = mapper.readTree(result);
-	        System.out.println("영화이름: " + movie.get("movieNm").asText());
-	        System.out.println("서비스키: " + kmdbAPIKey);
-	        System.out.println("개봉일: " + movie.get("openDt").asText().replaceAll("-", ""));
-	        System.out.println("감독:" + director);
 	        String postersUrl = rootNode.path("Data").get(0).path("Result").get(0).path("posters").asText();
             
 	        /*일일박스오피스 DTO에 추가*/

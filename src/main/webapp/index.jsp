@@ -45,6 +45,7 @@
 					level: 3 // 지도의 확대 레벨
 				};
 			let map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
+			const keywords = ['롯데시네마', 'CGV', '메가박스'];
 				
 			if (navigator.geolocation) { // HTML5의 geolocation으로 사용 확인
 				
@@ -59,10 +60,24 @@
 					          sort: kakao.maps.services.SortBy.DISTANCE,
 					          category_group_code: 'CT1'
 					        };
+					
+					// 키워드 배열
+			        const keywords = ['롯데시네마', 'CGV', '메가박스'];
 
-			        ps.keywordSearch('롯데시네마', placesSearchCB, options);
-			        ps.keywordSearch('CGV', placesSearchCB, options);
-			        ps.keywordSearch('메가박스', placesSearchCB, options);
+			        // 비동기 작업을 순차적으로 처리하는 함수
+			        function searchCinemasSequentially(index) {
+			            if (index < keywords.length) {
+			                let ps = new kakao.maps.services.Places();
+			                ps.keywordSearch(keywords[index], function(data, status, pagination) {
+			                    placesSearchCB(data, status, pagination);
+			                    searchCinemasSequentially(index + 1); // 다음 키워드로 검색
+			                }, options);
+			            }
+			        }
+
+			        // 순차적으로 영화관 검색 시작
+			        searchCinemasSequentially(0);
+			        
 			      });
 				}// 현재 위치 얻기 end
 				
@@ -76,7 +91,7 @@
 				        for (let i=0; i<data.length; i++) {
 				            displayMarker(data[i]);    
 				            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-				            getSchedule(data[i].place_url);
+				            //getSchedule(data[i].place_url);
 				            
 				            listCinema.append('<a href="'+data[i].place_url+'" target=_blank class="list-group-item list-group-item-action">'+data[i].place_name+'</a>');
 				        }       
@@ -91,12 +106,13 @@
 				        map: map,
 				        position: new kakao.maps.LatLng(place.y, place.x) 
 				    });
-
+				
 				    kakao.maps.event.addListener(marker, 'click', function() {  // 마커 클릭이벤트 등록
 				        
 				        infowindow.setContent('<div style="padding:5px; font-size:12px;">' + place.place_name + '</div>' + '<div>'+place.distance+'M </div>'); // 마커 클릭시 정보 출력
 				        infowindow.open(map, marker);
 				    });
+				    
 				}//displayMarker end
 				
 				
