@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+ <%@ page contentType="text/html; charset=euc-kr" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
  <c:if test="${ ! empty user }">
@@ -18,8 +18,8 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9bb092e55e04073df199c8fdf46abadd&libraries=services"></script><!-- 카카오 지도 -->
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=5ywbd53nfb&submodules=geocoder"></script><!-- 네이버 지도 -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK3BruPsInXptwielzi9Ni5JmKJNfGnFE&callback=initMap&v=weekly" defer></script> <!-- 구글 지도 -->
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK3BruPsInXptwielzi9Ni5JmKJNfGnFE&callback=initMap&v=weekly" defer></script> 구글 지도
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> -->
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style></style>
@@ -42,7 +42,7 @@
 			});
 			
 			///////////////////////////////******* MAP *********//////////////////////////////////////////
-			/*
+			
 			let infowindow = new kakao.maps.InfoWindow({zIndex:1}); // 마커 클릭 시 장소명을 표출할 인포윈도우
 			let mapContainer = document.getElementById('map'); // 지도 표시할 div 
 			let mapOption = {
@@ -96,7 +96,6 @@
 				        for (let i=0; i<data.length; i++) {
 				            displayMarker(data[i]);    
 				            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-				            //getSchedule(data[i].place_url);
 				            
 				            listCinema.append('<a href="'+data[i].place_url+'" target=_blank class="list-group-item list-group-item-action">'+data[i].place_name+'</a>');
 				        }       
@@ -119,7 +118,7 @@
 				    });
 				    
 				}//displayMarker end
-				*/
+				
 				/////////////////// *****네이버맵 ****//////////////////////////////////////////////////////
 				
 				/* var map = new naver.maps.Map('map', {
@@ -171,7 +170,7 @@
 				
 				
 				////////////////////////////구글맵////////////////////////////////////////
-				
+				/*
 				let map, infoWindow;
 
 				function initMap() {
@@ -223,24 +222,8 @@
 				}
 
 				window.initMap = initMap;
+				*/
 		});
-		
-		function getSchedule(url) {
-			$.ajax({
-				url: "/openAPI/json/getSchedule/",
-				method: "POST",
-				data: url,
-				headers: {
-					"Accept": "application/json",
-					"Content-Type": "application/json"
-				},
-				data: url,
-				
-				success: function(data) {							
-						console.log(data);
-					}
-				});
-		}//크롤링으로 얻어오기
 		
 	</script>
 	
