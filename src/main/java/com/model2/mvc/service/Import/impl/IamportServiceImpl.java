@@ -1,5 +1,7 @@
 package com.model2.mvc.service.Import.impl;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,10 +56,15 @@ public class IamportServiceImpl implements IamportService{
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setBearerAuth(access_token);
-
+		
+		LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        String formattedDateTime = currentDateTime.format(formatter);
+        System.out.println("½Ã°£:" + formattedDateTime);
+        
 		Map<String, Object> map = new HashMap<>();
-		map.put("customer_uid", "test-0000");
-		map.put("merchant_uid", "order_monthly_0007");
+		map.put("customer_uid", "test-0017");
+		map.put("merchant_uid", "order_monthly_" + formattedDateTime);
 		map.put("amount", "1000");
 		map.put("name", "test05");
 

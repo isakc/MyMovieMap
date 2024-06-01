@@ -31,8 +31,6 @@ public class ReqPaymentScheduler {
     }
     
     private Runnable getRunnable(String customer_uid, int price){
-    	System.out.println("test중..");
-    	
         return () -> {
         	try {
 				setSchedulePay.schedulePay(customer_uid, price);
@@ -45,6 +43,6 @@ public class ReqPaymentScheduler {
  
     private Trigger getTrigger() {
         // 작업 주기 설정 
-        return new PeriodicTrigger(1, TimeUnit.MINUTES);
+        return new PeriodicTrigger(10, TimeUnit.SECONDS);
     }
 }

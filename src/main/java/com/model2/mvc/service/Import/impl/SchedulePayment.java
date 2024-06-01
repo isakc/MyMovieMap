@@ -2,6 +2,8 @@ package com.model2.mvc.service.Import.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -29,9 +31,15 @@ public class SchedulePayment {
 	
 	public String schedulePay(String customer_uid, int price) throws Exception {
 		String token = pay.getToken();
+		
+		LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        String formattedDateTime = currentDateTime.format(formatter);
+        System.out.println("½Ã°£:" + formattedDateTime);
+		
 		long timestamp = 0;
 		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.KOREA);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.KOREA);
 		
 		cal.add(Calendar.MINUTE, +1);
 		String date = sdf.format(cal.getTime());
@@ -57,13 +65,14 @@ public class SchedulePayment {
 		 headers.setBearerAuth(access_token);
 		 
 		 JsonObject jsonObject = new JsonObject();
-		 jsonObject.addProperty("merchant_uid", timestamp);
+		 jsonObject.addProperty("merchant_uid", formattedDateTime);
 		 jsonObject.addProperty("schedule_at", timestamp);
 		 jsonObject.addProperty("amount", price);
 		 
 		 JsonArray jsonArr = new JsonArray();
 		 
-		 jsonArr.add(jsonObject); JsonObject reqJson = new JsonObject();
+		 jsonArr.add(jsonObject);
+		 JsonObject reqJson = new JsonObject();
 		 
 		 reqJson.addProperty("customer_uid", customer_uid); 
 		 reqJson.add("schedules",jsonArr);
@@ -74,6 +83,9 @@ public class SchedulePayment {
 		 
 		 HttpEntity<String> entity = new HttpEntity<>(json, headers);
 		 
-		 return restTemplate.postForObject("https://api.iamport.kr/subscribe/payments/schedule", entity, String.class);
+		 String result = restTemplate.postForObject("https://api.iamport.kr/subscribe/payments/schedule", entity, String.class);
+		 System.out.println("result: \n" + result);
+		 
+		 return result;
 	}
 }
