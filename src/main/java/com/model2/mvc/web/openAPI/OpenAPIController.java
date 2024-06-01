@@ -64,6 +64,6 @@ public class OpenAPIController {
     @GetMapping("/importAccessKey")
     public void importAccessKey() throws Exception{
 		System.out.println(iamportService.requestSubPay());
-		reqPaymentScheduler.startScheduler("test-0001", 1000);
+		reqPaymentScheduler.startScheduler("test-0017", 1000);
     }
 }
