@@ -83,7 +83,7 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 	        
 	        /*가져온 데이터 파싱하기*/
 	        rootNode = mapper.readTree(result);
-	        String postersUrl = rootNode.path("Data").get(0).path("Result").get(0).path("posters").asText();
+	        String postersUrl = rootNode != null ? rootNode.path("Data").get(0).path("Result").get(0).path("posters").asText() : "";
             
 	        /*일일박스오피스 DTO에 추가*/
 			DailyBoxOffice dailyBoxOffice = mapper.convertValue(movie, DailyBoxOffice.class);
