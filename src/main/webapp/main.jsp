@@ -81,7 +81,6 @@ strong {
 				
 						<div class="col-sm-4">
 							<div class="col-item">
-								docker run 
 									<div class="photo">
 										<img src="${movie.posterPath[0] }" class="img-responsive" alt="a" />
 									</div><!-- photo -->

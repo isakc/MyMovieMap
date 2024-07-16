@@ -77,13 +77,17 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 	        urlBuilder.append("&" + URLEncoder.encode("title","UTF-8") + "=" + URLEncoder.encode(movie.get("movieNm").asText(), "UTF-8")); /*영화이름*/
 	        urlBuilder.append("&" + URLEncoder.encode("releaseDts","UTF-8") + "=" + URLEncoder.encode(movie.get("openDt").asText().replaceAll("-", ""), "UTF-8"));//개봉날짜
 	        //urlBuilder.append("&" + URLEncoder.encode("nation","UTF-8") + "=" + URLEncoder.encode(nationQuery, "UTF-8"));//개봉날짜
-	        urlBuilder.append("&" + URLEncoder.encode("director","UTF-8") + "=" + URLEncoder.encode(director, "UTF-8"));//감독이름
+	        //urlBuilder.append("&" + URLEncoder.encode("director","UTF-8") + "=" + URLEncoder.encode(director, "UTF-8"));//감독이름
 	        
 	        result = readStreamToString(urlBuilder.toString());
 	        
 	        /*가져온 데이터 파싱하기*/
 	        rootNode = mapper.readTree(result);
-	        String postersUrl = rootNode.path("Data").get(0).path("Result").get(0).path("posters").asText();
+	        String postersUrl = "";
+	        
+	        if(rootNode != null) {
+		        postersUrl = rootNode.path("Data").get(0).path("Result").get(0).path("posters").asText();
+	        }
             
 	        /*일일박스오피스 DTO에 추가*/
 			DailyBoxOffice dailyBoxOffice = mapper.convertValue(movie, DailyBoxOffice.class);
