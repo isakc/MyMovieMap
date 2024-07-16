@@ -87,7 +87,7 @@ public class OpenAPIServiceImpl implements OpenAPIService {
 	        String postersUrl = "";
 	        
 	        if(rootNode != null) {
-		        postersUrl = rootNode.path("Data").get(0).path("Result").get(0).path("posters").asText();
+		        postersUrl = rootNode.path("Data").get(0).path("Result").get(0).path("posters").asText();//포스터 Null처리
 	        }
             
 	        /*일일박스오피스 DTO에 추가*/
