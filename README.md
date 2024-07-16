@@ -15,6 +15,7 @@ Spring에서 Spring Boot로 마이그레이션하여 자동 구성, 간소화된
 ![OracleDB](https://img.shields.io/badge/OracleDB-F80000?style=for-the-badge&logo=oracle&logoColor=white)
 ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)
 ![JUnit](https://img.shields.io/badge/JUnit-25A162?style=for-the-badge&logo=junit5&logoColor=white)
+![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white)
 
 ### [사용한 오픈 API 목록]
 * 영화진흥위원회 API(일일 박스오피스, 영화 상세정보)
